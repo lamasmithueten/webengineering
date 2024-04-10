@@ -15,16 +15,38 @@ if( !filter_var ($email, FILTER_VALIDATE_EMAIL ) ){
 	exit();
 }
 
-	$sqlquery = "INSERT INTO accounts VALUES ( NULL, '$username', '$password', '$email')" ;
+$sqlquery = "SELECT username FROM accounts WHERE username = '$username'";
 
-	if(mysqli_query($con, $sqlquery)){
-		echo "<h3>Account registriert<h3>";
-		echo nl2br ("\n$username\n $email\n ");
-	} 
-	else {
-		echo "ERROR: "
-		. mysqli_error($con);
-	}
+$result = $con -> query($sqlquery);
+
+if ($result ->num_rows>0){
+	echo "Username $username ist schon in Verwendung.";
+	echo '<br><a href="register.html">Zurück zum Registrieren</a><br><a href="indexx.html">Zurück zur Anmeldung</a><br>';
+	exit();
+}
+
+$sqlquery = "SELECT email FROM accounts WHERE email = '$email'";
+
+$result = $con -> query($sqlquery);
+
+if ($result ->num_rows>0){
+	echo "Emailadresse $email ist schon in Verwendung.";
+	echo '<br><a href="register.html">Zurück zum Registrieren</a><br><a href="indexx.html">Zurück zur Anmeldung</a><br>';
+	exit();
+}
+
+
+
+$sqlquery = "INSERT INTO accounts VALUES ( NULL, '$username', '$password', '$email')" ;
+
+if(mysqli_query($con, $sqlquery)){
+	echo "<h3>Account registriert<h3>";
+	echo nl2br ("\n$username\n $email\n ");
+} 
+else {
+	echo "ERROR: "
+	. mysqli_error($con);
+}
 mysqli_close($con);
 
 ?>
