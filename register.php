@@ -7,10 +7,7 @@ if (mysqli_connect_errno()){
 }
 
 $username = $_POST['username'];
-$optionen = [
-    'cost' => 12,
-];
-$password = password_hash($_POST['email'], PASSWORD_BCRYPT, $optionen);
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $email = $_POST['email'];
 
 $sqlquery = "INSERT INTO accounts VALUES ( NULL, '$username', '$password', '$email')" ;
