@@ -6,9 +6,9 @@ if (mysqli_connect_errno()){
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 
-$username = $_POST['username'];
+$username = mysqli_real_escape_string($con, $_POST['username']);
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-$email = $_POST['email'];
+$email = mysqli_real_escape_string($con, $_POST['email']);
 
 if( !filter_var ($email, FILTER_VALIDATE_EMAIL ) ){
 	echo "Emailadresse $email ist keine gültige Emailadresse.\n";
@@ -40,6 +40,8 @@ if ($result ->num_rows>0){
 $sqlquery = "INSERT INTO accounts VALUES ( NULL, '$username', '$password', '$email')" ;
 
 if(mysqli_query($con, $sqlquery)){
+	$text = "Dein Account $username wurde erfolgreich erstellt.\n";
+	mail ($email, "Account aktiviert", $text );
 	echo "<h3>Account registriert<h3>";
 	echo nl2br ("\n$username\n $email\n ");
 } 
