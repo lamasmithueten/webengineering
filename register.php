@@ -24,9 +24,11 @@ if( !filter_var ($email, FILTER_VALIDATE_EMAIL ) ){
 
 //Gucken, ob Nutzername schon in Verwendung ist
 
-$sqlquery = "SELECT username FROM accounts WHERE username = '$username'";
-
-$result = $con -> query($sqlquery);
+$sqlquery = "SELECT username FROM accounts WHERE username = ?";
+$stmt = $con->prepare($sqlquery);
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt -> get_result();
 
 if ($result ->num_rows>0){
 	echo "Username $username ist schon in Verwendung.";
@@ -36,9 +38,12 @@ if ($result ->num_rows>0){
 
 //Gucken, ob Email schon in Verwendung ist
 
-$sqlquery = "SELECT email FROM accounts WHERE email = '$email'";
+$sqlquery = "SELECT email FROM accounts WHERE email = ?";
+$stmt = $con->prepare($sqlquery);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt -> get_result();
 
-$result = $con -> query($sqlquery);
 
 if ($result ->num_rows>0){
 	echo "Emailadresse $email ist schon in Verwendung.";
@@ -48,9 +53,12 @@ if ($result ->num_rows>0){
 
 //Erstellung des Eintrags in der Datenbank
 
-$sqlquery = "INSERT INTO accounts VALUES ( NULL, '$username', '$password', '$email')" ;
+$sqlquery = "INSERT INTO accounts (id, username, password, email) VALUES ( NULL, ?, ?, ?)" ;
+$stmt = $con->prepare($sqlquery);
+$stmt->bind_param("sss", $username, $password, $email);
 
-if(mysqli_query($con, $sqlquery)){
+
+if($stmt->execute()){
 	$text = "Dein Account $username wurde erfolgreich erstellt.\n";
 	mail ($email, "Account aktiviert", $text );
 	echo "<h3>Account registriert<h3>";
@@ -58,7 +66,7 @@ if(mysqli_query($con, $sqlquery)){
 } 
 else {
 	echo "ERROR: "
-	. mysqli_error($con);
+	. $stmtn->error;
 }
 
 //Schließen der Verbindung
