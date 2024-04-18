@@ -13,7 +13,7 @@ session_start();
 
 <body>
 	<?php
-	if (isset($_SESSION['logggedin']) && $_SESSION['loggedin']) {
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
 		header('location:mainpage.html');
 	} else {
 		?>
