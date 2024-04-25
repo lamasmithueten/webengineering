@@ -66,7 +66,7 @@ if($stmt->execute()){
 } 
 else {
 	echo "ERROR: "
-	. $stmtn->error;
+	. $stmt->error;
 }
 
 //Schließen der Verbindung
