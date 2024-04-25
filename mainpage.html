@@ -26,21 +26,26 @@
 	</div>
 	<?php
 		foreach ($rows as $fieldname => $arrayEntry ){
-			echo $arrayEntry['username'];
-			echo "<br>";
-			echo $arrayEntry['text'];
-			echo "<br>";
-			echo $arrayEntry['timestamp'];
-			echo "<br>";
+			echo "<table>";
+			echo "<tr>";
+			echo $arrayEntry['title'];
+			echo "</tr><tr>";
 			if (isset($arrayEntry['picture_path'])){
 			$image = $arrayEntry['picture_path'];
 ?>
+			<td>
 			<img src="pictures/<?php echo $image;?>">
 <?php
-			echo "<br>";
+			echo "</td>";
 			}
-			echo $arrayEntry['title'];
-			echo "<br>";
+			echo "<td>";
+			echo $arrayEntry['text'];
+			echo "</td></tr><tr><td>";
+			echo $arrayEntry['username'];
+			echo "</td><td>";
+			echo $arrayEntry['timestamp'];
+			echo "</td></tr>";
+			echo "</table>";
 			echo "<br>";
 			echo "<br>";
 		}
