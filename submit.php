@@ -13,7 +13,8 @@ $text = mysqli_real_escape_string($con, $_POST['text']);
 $name = $_SESSION['name'];
 $temp_file = $_FILES['image']['tmp_name'];
 $filename = $_FILES['image']['name'];
-$imagepath= "/webserver/webengineering/pictures/";
+$imagepath= '/webserver/webengineering/pictures/';
+$fullpath= $imagepath . $filename;
 
 $sqlquery = "SELECT id FROM accounts WHERE username = ?";
 $stmt = $con->prepare($sqlquery);
@@ -22,6 +23,7 @@ $stmt->execute();
 $result= $stmt -> get_result();
 $id_array=$result->fetch_assoc();
 $id = $id_array["id"];
+
 
 
 $sqlquery = "INSERT INTO threads (id, text, id_account, timestamp, picture_path, title) VALUES (NULL, ?, ?, curdate(), ?, ?)";
@@ -35,7 +37,7 @@ $stmt->bind_param("ssss", $text, $id, $filename , $title );
 	echo '</pre>';
 	echo "<p>1. $filename 2.  $imagepath 3.  $temp_file</p>";
 
-if (move_uploaded_file($temp_file, "$imagepath$filename"  )){
+if (move_uploaded_file( $temp_file, $fullpath )){
 	if ($stmt->execute()){
 	    header("Location: mainpage.html");
 		
