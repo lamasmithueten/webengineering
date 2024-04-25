@@ -1,0 +1,23 @@
+user <------- Threads <-------Kommentare
+
+
+accounts
+-username
+-email
+-password
+-id
+
+threads
+-id_account
+-text
+-id
+-timestamp
+-picture (optional)
+-title(otional)
+
+comments
+-id_thread
+-id
+-text
+-timestamp
+-id_account
