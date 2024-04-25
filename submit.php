@@ -11,6 +11,7 @@ if (mysqli_connect_errno()){
 $title = mysqli_real_escape_string($con, $_POST['title']);
 $text = mysqli_real_escape_string($con, $_POST['text']);
 $name = $_SESSION['name'];
+
 $temp_file = $_FILES['image']['tmp_name'];
 $filename = $_FILES['image']['name'];
 $imagepath= '/webserver/webengineering/pictures/';
@@ -25,8 +26,7 @@ $id_array=$result->fetch_assoc();
 $id = $id_array["id"];
 
 
-
-$sqlquery = "INSERT INTO threads (id, text, id_account, timestamp, picture_path, title) VALUES (NULL, ?, ?, curdate(), ?, ?)";
+$sqlquery = "INSERT INTO threads (id, text, id_account, timestamp, picture_path, title) VALUES (NULL, ?, ?, now(), ?, ?)";
 $stmt = $con->prepare($sqlquery);
 $stmt->bind_param("ssss", $text, $id, $filename , $title );
 

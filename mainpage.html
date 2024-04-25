@@ -1,5 +1,16 @@
 <?php
 	include("redirect.php");
+	include("access_database.php");
+
+	$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+	if (mysqli_connect_errno()){
+		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+	}
+	$sqlquery = "SELECT username, text, timestamp, picture_path, title FROM accounts JOIN threads ON accounts.id = threads.id_account";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->execute();
+	$result = $stmt -> get_result();
+	$rows=$result->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,5 +24,31 @@
 	<div class="submit-link">
 		<a href="submit.html">submit a new thread</a>
 	</div>
+	<?php
+		foreach ($rows as $fieldname => $arrayEntry ){
+			echo $arrayEntry['username'];
+			echo "<br>";
+			echo $arrayEntry['text'];
+			echo "<br>";
+			echo $arrayEntry['timestamp'];
+			echo "<br>";
+			if (isset($arrayEntry['picture_path'])){
+			$image = $arrayEntry['picture_path'];
+?>
+			<img src="pictures/<?php echo $image;?>">
+<?php
+			echo "<br>";
+			}
+			echo $arrayEntry['title'];
+			echo "<br>";
+			echo "<br>";
+			echo "<br>";
+		}
+	?>
+	
 </body>
 </html>
+
+<?php 
+mysqli_close($con);
+?>
