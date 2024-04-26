@@ -39,7 +39,7 @@ $stmt->bind_param("ssss", $text, $id, $filename , $title );
 
 if (move_uploaded_file( $temp_file, $fullpath )){
 	if ($stmt->execute()){
-	    header("Location: mainpage.html");
+	    header("Location: ../mainpage.html");
 		
 	}
 	else{
