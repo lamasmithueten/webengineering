@@ -8,8 +8,8 @@
 <body>
 	<h1>Submit a new thread</h1>
 	<form action="php/submit.php" method="post" enctype="multipart/form-data">
-	<input type="text" name="title" placeholder="Title" id="title" required/>
-	<textarea id="text" name="text" required></textarea>
+	<input type="text" name="title" placeholder="Title" id="title" size="255" required/>
+	<textarea id="text" name="text" maxlength="65535" required></textarea>
 	<input type="file" name="image" accept="image/png, image/gif, image/jpeg"/>
 	<input type="submit" value="submit"/>
 	</form>
