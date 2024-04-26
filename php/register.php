@@ -32,7 +32,7 @@ $result = $stmt -> get_result();
 
 if ($result ->num_rows>0){
 	echo "Username $username ist schon in Verwendung.";
-	echo '<br><a href="register.html">Zurück zum Registrieren</a><br><a href="index.html">Zurück zur Anmeldung</a><br>';
+	echo '<br><a href="../register.html">Zurück zum Registrieren</a><br><a href="index.html">Zurück zur Anmeldung</a><br>';
 	exit();
 }
 
@@ -47,7 +47,7 @@ $result = $stmt -> get_result();
 
 if ($result ->num_rows>0){
 	echo "Emailadresse $email ist schon in Verwendung.";
-	echo '<br><a href="register.html">Zurück zum Registrieren</a><br><a href="indexx.html">Zurück zur Anmeldung</a><br>';
+	echo '<br><a href="../register.html">Zurück zum Registrieren</a><br><a href="indexx.html">Zurück zur Anmeldung</a><br>';
 	exit();
 }
 
