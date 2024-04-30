@@ -6,7 +6,7 @@
 	if (mysqli_connect_errno()){
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
-	$sqlquery = "SELECT username, text, timestamp, picture_path, title FROM accounts JOIN threads ON accounts.id = threads.id_account";
+	$sqlquery = "SELECT username, text, timestamp, picture_path, title FROM accounts JOIN threads ON accounts.id = threads.id_account order by timestamp DESC";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->execute();
 	$result = $stmt -> get_result();
@@ -14,28 +14,27 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
 <body>
-	<p>Hello World!</p>
 	<div class="submit-link">
 		<a href="submit.html">submit a new thread</a>
 	</div>
 	<?php
-		foreach ($rows as $fieldname => $arrayEntry ){
+		foreach ($rows as $fieldname => $arrayEntry){
 			echo "<table>";
-			echo "<tr>";
+			echo "<tr><td>";
 			echo $arrayEntry['title'];
-			echo "</tr><tr>";
+			echo "</td></tr><tr>";
 			if (isset($arrayEntry['picture_path'])){
 			$image = $arrayEntry['picture_path'];
-?>
+	?>
 			<td>
 			<img src="pictures/<?php echo $image;?>">
-<?php
+	<?php
 			echo "</td>";
 			}
 			echo "<td>";
@@ -55,5 +54,5 @@
 </html>
 
 <?php 
-mysqli_close($con);
+	mysqli_close($con);
 ?>
