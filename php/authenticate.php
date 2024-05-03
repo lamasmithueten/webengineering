@@ -18,7 +18,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
 
 function redirect()
 {
-	header('location:../mainpage.html');
+	header('location:../mainpage');
 }
 
 function createSession()
