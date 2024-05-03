@@ -6,7 +6,7 @@
 	if (mysqli_connect_errno()){
 		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 	}
-	$sqlquery = "SELECT username, text, timestamp, picture_path, title FROM accounts JOIN threads ON accounts.id = threads.id_account order by timestamp DESC";
+	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id FROM accounts JOIN threads ON accounts.id = threads.id_account order by timestamp DESC";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->execute();
 	$result = $stmt -> get_result();
@@ -26,9 +26,9 @@
 	<?php
 		foreach ($rows as $fieldname => $arrayEntry){
 			echo "<table>";
-			echo "<tr><td>";
+			echo '<tr><td><a href="https://webeng.mwerr.de/thread/' . $arrayEntry['id'] . '">';
 			echo $arrayEntry['title'];
-			echo "</td></tr><tr>";
+			echo "</a></td></tr><tr>";
 			if (isset($arrayEntry['picture_path'])){
 			$image = $arrayEntry['picture_path'];
 	?>
