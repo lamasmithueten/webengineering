@@ -31,7 +31,7 @@ $id = $id_array["id"];
 if($filename != NULL){
 $sqlquery = "INSERT INTO threads (id, text, id_account, timestamp, picture_path, title) VALUES (NULL, ?, ?, now(), ?, ?)";
 $stmt = $con->prepare($sqlquery);
-$stmt->bind_param("ssss", $text, $id, $filename , $title );
+$stmt->bind_param("siss", $text, $id, $filename , $title );
 
 	if (move_uploaded_file( $temp_file, $fullpath )){
 		if ($stmt->execute()){
@@ -62,5 +62,6 @@ $stmt->bind_param("sss", $text, $id, $title );
 		}
 
 }
+mysqli_close($con);
 
 ?>

@@ -47,4 +47,5 @@ function createSession()
 		$stmt->close();
 	}
 }
+	mysqli_close($con);
 ?>

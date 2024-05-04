@@ -1,6 +1,8 @@
 <?php
-	include('php/redirect.php');
+	include('redirect.php');
 	include('access_database.php');
+
+	$userID = $_SESSION['id'];;
 	
 	$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 	if (mysqli_connect_errno()){
@@ -23,31 +25,38 @@
 <body>
 	<p>Thread</p>
 <?php	
-		foreach ($rows as $fieldname => $arrayEntry){
-			echo "<table>";
-			echo '<tr><td>';
-			echo $arrayEntry['title'];
-			echo "</td></tr><tr>";
-			if (isset($arrayEntry['picture_path'])){
-			$image = $arrayEntry['picture_path'];
-	?>
-			<td>
-			<img src="https://webeng.mwerr.de/pictures/<?php echo $image;?>">
-	<?php
-			echo "</td>";
-			}
-			echo "<td>";
-			echo $arrayEntry['text'];
-			echo "</td></tr><tr><td>";
-			echo $arrayEntry['username'];
-			echo "</td><td>";
-			echo $arrayEntry['timestamp'];
-			echo "</td></tr>";
-			echo "</table>";
-			echo "<br>";
-			echo "<br>";
-		}
+	foreach ($rows as $fieldname => $arrayEntry){
+		echo "<table>";
+		echo '<tr><td>';
+		echo $arrayEntry['title'];
+		echo "</td></tr><tr>";
+		if (isset($arrayEntry['picture_path'])){
+		$image = $arrayEntry['picture_path'];
 ?>
+		<td>
+		<img src="https://webeng.mwerr.de/pictures/<?php echo $image;?>">
+<?php
+			echo "</td>";
+		}
+		echo "<td>";
+		echo $arrayEntry['text'];
+		echo "</td></tr><tr><td>";
+		echo $arrayEntry['username'];
+		echo "</td><td>";
+		echo $arrayEntry['timestamp'];
+		echo "</td></tr>";
+		echo "</table>";
+		echo "<br>";
+		echo "<br>";
+	}
+?>
+	<br><br><br>
+	<p>Submit a comment</p>
+	<form action="https://webeng.mwerr.de/php/submit_comment.php" method="post" enctype="multipart/form-data">
+	<textarea id="comment" name="comment" maxlength="65535" required></textarea>
+	<input type="hidden" name="threadid" id="threadid" value="<?php echo $thread_id ?>"/>
+	<input type="submit" value="submit"/>
+	</form>	
 </body>
 </html>
 <?php mysqli_close($con); ?>
