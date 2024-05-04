@@ -57,6 +57,27 @@
 	<input type="hidden" name="threadid" id="threadid" value="<?php echo $thread_id ?>"/>
 	<input type="submit" value="submit"/>
 	</form>	
+	<br><br><br>
+	<p>Comments</p>
+	<?php
+		$sqlquery = "select accounts.username, comments.text, comments.timestamp from accounts join comments on accounts.id=comments.id_account join threads on comments.id_thread=threads.id where threads.id=?";
+		$stmt = $con->prepare($sqlquery);
+		$stmt->bind_param("s", $thread_id);
+		$stmt->execute();
+		$result = $stmt -> get_result();
+		$rows=$result->fetch_all(MYSQLI_ASSOC);
+
+		foreach ($rows as $fieldname => $arrayEntry){
+			echo "<table>";
+			echo "<tr><td>";
+			echo $arrayEntry['text'];
+			echo "</td></tr><tr><td>";
+			echo $arrayEntry['username'];
+			echo "</td><td>";
+			echo $arrayEntry['timestamp'];
+			echo "</td></tr></table>";
+		}
+	?>
 </body>
 </html>
 <?php mysqli_close($con); ?>
