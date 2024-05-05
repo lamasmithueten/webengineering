@@ -39,7 +39,7 @@
 			echo "</td>";
 		}
 		echo "<td>";
-		echo $arrayEntry['text'];
+		echo nl2br($arrayEntry['text']);
 		echo "</td></tr><tr><td>";
 		echo $arrayEntry['username'];
 		echo "</td><td>";
@@ -70,7 +70,7 @@
 		foreach ($rows as $fieldname => $arrayEntry){
 			echo "<table>";
 			echo "<tr><td>";
-			echo $arrayEntry['text'];
+			echo nl2br($arrayEntry['text']);
 			echo "</td></tr><tr><td>";
 			echo $arrayEntry['username'];
 			echo "</td><td>";
