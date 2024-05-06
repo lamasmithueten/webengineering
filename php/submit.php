@@ -13,7 +13,7 @@ $text = mysqli_real_escape_string($con, $_POST['text']);
 $name = $_SESSION['name'];
 
 $temp_file = $_FILES['image']['tmp_name'];
-$filename = $_FILES['image']['name'];
+$filename = md5($_FILES['image']['name']);
 $imagepath= '/webserver/webengineering/pictures/';
 $fullpath= $imagepath . $filename;
 
