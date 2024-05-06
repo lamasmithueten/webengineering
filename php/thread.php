@@ -28,7 +28,7 @@
 	foreach ($rows as $fieldname => $arrayEntry){
 		echo "<table>";
 		echo '<tr><td>';
-		echo $arrayEntry['title'];
+		echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['title']);
 		echo "</td></tr><tr>";
 		if (isset($arrayEntry['picture_path'])){
 		$image = $arrayEntry['picture_path'];
@@ -39,7 +39,7 @@
 			echo "</td>";
 		}
 		echo "<td>";
-		echo nl2br($arrayEntry['text']);
+		echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']);
 		echo "</td></tr><tr><td>";
 		echo $arrayEntry['username'];
 		echo "</td><td>";
@@ -70,7 +70,7 @@
 		foreach ($rows as $fieldname => $arrayEntry){
 			echo "<table>";
 			echo "<tr><td>";
-			echo nl2br($arrayEntry['text']);
+			echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']);
 			echo "</td></tr><tr><td>";
 			echo $arrayEntry['username'];
 			echo "</td><td>";
