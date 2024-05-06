@@ -21,34 +21,29 @@
 <head>
   <meta charset="utf-8">
   <title></title>
+		<link rel="stylesheet" type="text/css" href="../css/thread.css">
 </head>
 <body>
 	<p>Thread</p>
 <?php	
-	foreach ($rows as $fieldname => $arrayEntry){
-		echo "<table>";
-		echo '<tr><td>';
-		echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['title']);
-		echo "</td></tr><tr>";
-		if (isset($arrayEntry['picture_path'])){
-		$image = $arrayEntry['picture_path'];
-?>
-		<td>
-		<img src="https://webeng.mwerr.de/pictures/<?php echo $image;?>">
-<?php
-			echo "</td>";
-		}
-		echo "<td>";
-		echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']);
-		echo "</td></tr><tr><td>";
-		echo $arrayEntry['username'];
-		echo "</td><td>";
-		echo $arrayEntry['timestamp'];
-		echo "</td></tr>";
-		echo "</table>";
-		echo "<br>";
-		echo "<br>";
-	}
+foreach ($rows as $fieldname => $arrayEntry) {
+    echo '<div class="thread">';
+    // Display title
+    echo '<div class="title">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['title']) . '</div>';
+    // Display post content
+    echo '<div class="post">';
+    if (isset($arrayEntry['picture_path'])) {
+        $image = $arrayEntry['picture_path'];
+        echo '<div class="image"><img src="https://webeng.mwerr.de/pictures/' . $image . '"></div>';
+    }
+    echo '<div class="text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
+    echo '</div>'; 
+    echo '<div class="user_info">';
+    echo '<div class="username">' . $arrayEntry['username'] . '</div>';
+    echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
+    echo '</div>'; 
+    echo '</div>'; 
+}
 ?>
 	<br><br><br>
 	<p>Submit a comment</p>
@@ -67,16 +62,18 @@
 		$result = $stmt -> get_result();
 		$rows=$result->fetch_all(MYSQLI_ASSOC);
 
-		foreach ($rows as $fieldname => $arrayEntry){
-			echo "<table>";
-			echo "<tr><td>";
-			echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']);
-			echo "</td></tr><tr><td>";
-			echo $arrayEntry['username'];
-			echo "</td><td>";
-			echo $arrayEntry['timestamp'];
-			echo "</td></tr></table>";
-		}
+echo '<div class="comments">';
+echo '<p>Comments</p>';
+foreach ($rows as $fieldname => $arrayEntry) {
+    echo '<div class="comment">';
+    echo '<div class="comment-text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
+    echo '<div class="comment-info">';
+    echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
+    echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
+    echo '</div>'; 
+    echo '</div>'; 
+}
+echo '</div>'; 
 	?>
 </body>
 </html>
