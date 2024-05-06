@@ -18,36 +18,35 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Document</title>
+		<link rel="stylesheet" type="text/css" href="css/mainpage.css">
 	</head>
 <body>
 	<div class="submit-link">
 		<a href="submit.html">submit a new thread</a>
 	</div>
 	<?php
-		foreach ($rows as $fieldname => $arrayEntry){
-			echo "<table>";
-			echo '<tr><td><a href="https://webeng.mwerr.de/thread/' . $arrayEntry['id'] . '">';
-			echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>',$arrayEntry['title']);
-			echo "</a></td></tr><tr>";
-			if (isset($arrayEntry['picture_path'])){
-			$image = $arrayEntry['picture_path'];
-	?>
-			<td>
-			<img src="https://webeng.mwerr.de/pictures/<?php echo $image;?>">
-	<?php
-			echo "</td>";
-			}
-			echo "<td>";
-			echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']);
-			echo "</td></tr><tr><td>";
-			echo $arrayEntry['username'];
-			echo "</td><td>";
-			echo $arrayEntry['timestamp'];
-			echo "</td></tr>";
-			echo "</table>";
-			echo "<br>";
-			echo "<br>";
-		}
+foreach ($rows as $fieldname => $arrayEntry) {
+    echo '<div class="thread">';
+    echo '<div class="title"><a href="https://webeng.mwerr.de/thread/' . $arrayEntry['id'] . '">';
+    echo str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['title']);
+    echo "</a></div>";
+
+    echo '<div class="post">';
+    if (isset($arrayEntry['picture_path'])) {
+        $image = $arrayEntry['picture_path'];
+        echo '<div class="image"><img src="https://webeng.mwerr.de/pictures/' . $image . '"></div>';
+    }
+    echo '<div class="text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
+    echo '</div>'; // end of post
+
+    echo '<div class="user_info">';
+    echo '<div class="username">' . $arrayEntry['username'] . '</div>';
+    echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
+    echo '</div>'; // end of user_info
+
+    echo '</div>'; // end of thread
+    echo "<br>";
+}
 	?>
 	
 </body>
