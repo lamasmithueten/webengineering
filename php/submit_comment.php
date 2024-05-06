@@ -16,9 +16,6 @@ $sqlquery = "INSERT INTO comments (id, id_thread, text, timestamp, id_account) V
 $stmt = $con->prepare($sqlquery);
 $stmt->bind_param("isi", $thread_id, $comment, $account_id);
 if($stmt->execute()){
-	echo "<p>$thread_id</p>";
-	echo "<p>$comment</p>";
-	echo "<p>$account_id</p>";
 	header("Location: https://webeng.mwerr.de/thread/$thread_id");
 	exit;
 }
