@@ -1,3 +1,4 @@
+/* Styles for threads */
 .thread {
     border: 1px solid #ccc;
     margin-bottom: 10px;
@@ -17,6 +18,14 @@
 
 .image {
     margin-right: 10px;
+    max-width: 200px; /* Adjust the maximum width as needed */
+    max-height: 200px; /* Adjust the maximum height as needed */
+    overflow: hidden;
+}
+
+.image img {
+    width: 100%;
+    height: auto;
 }
 
 .text {
@@ -37,6 +46,7 @@
     color: #777;
 }
 
+/* Styles for submit link */
 .submit-link {
     margin-top: 20px;
 }
