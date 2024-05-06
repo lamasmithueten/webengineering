@@ -44,17 +44,15 @@ foreach ($rows as $fieldname => $arrayEntry) {
     echo '</div>'; 
     echo '</div>'; 
 }
-?>
-	<br><br><br>
-	<p>Submit a comment</p>
-	<form action="https://webeng.mwerr.de/php/submit_comment.php" method="post" enctype="multipart/form-data">
-	<textarea id="comment" name="comment" maxlength="65535" required></textarea>
-	<input type="hidden" name="threadid" id="threadid" value="<?php echo $thread_id ?>"/>
-	<input type="submit" value="submit"/>
-	</form>	
-	<br><br><br>
-	<p>Comments</p>
-	<?php
+
+echo '<div class="comment-form">';
+echo '<p>Submit a comment</p>';
+echo '<form action="https://webeng.mwerr.de/php/submit_comment.php" method="post" enctype="multipart/form-data">';
+echo '<textarea id="comment" name="comment" maxlength="65535" required></textarea>';
+echo '<input type="hidden" name="threadid" id="threadid" value="' . $thread_id . '"/>'; // Use $thread_id directly without PHP tags
+echo '<input type="submit" value="submit"/>';
+echo '</form>';
+echo '</div>';
 		$sqlquery = "select accounts.username, comments.text, comments.timestamp from accounts join comments on accounts.id=comments.id_account join threads on comments.id_thread=threads.id where threads.id=?";
 		$stmt = $con->prepare($sqlquery);
 		$stmt->bind_param("s", $thread_id);
