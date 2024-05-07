@@ -1,13 +1,10 @@
 <?php
 	include('redirect.php');
-	include('access_database.php');
+	include("sql.php");
 
 	$userID = $_SESSION['id'];
 	
-	$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-	if (mysqli_connect_errno()){
-		exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-	}
+	$con = openConnection();
 	$thread_id = $_GET['variable'];
 	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id FROM accounts JOIN threads ON accounts.id = threads.id_account WHERE threads.id = ?";
 	$stmt = $con->prepare($sqlquery);
@@ -77,4 +74,4 @@ echo '</div>';
 	?>
 </body>
 </html>
-<?php mysqli_close($con); ?>
+<?php closeConnection($con); ?>
