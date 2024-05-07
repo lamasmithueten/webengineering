@@ -1,8 +1,8 @@
 <?php
 
-$DATABASE_HOST='kvmserver';
-$DATABASE_USER='web_eng_user';
-$DATABASE_PASS='Phaer8ye';
+$DATABASE_HOST='localhost';
+$DATABASE_USER='root';
+$DATABASE_PASS='';
 $DATABASE_NAME='web_eng';
 
 ?>

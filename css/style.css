@@ -1,12 +1,11 @@
-/* Reset default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Style the login container */
-.login {
+
+.authenticate {
   width: 300px;
   margin: 0 auto;
   padding: 20px;
@@ -18,9 +17,9 @@
   transform: translate(-50%, -50%);
 }
 
-/* Style form inputs */
-.login input[type="text"],
-.login input[type="password"] {
+
+.authenticate input[type="text"],
+.authenticate input[type="password"] {
   width: 100%;
   margin-bottom: 10px;
   padding: 10px;
@@ -28,8 +27,8 @@
   border-radius: 5px;
 }
 
-/* Style login button */
-.login input[type="submit"] {
+
+.authenticate input[type="submit"] {
   width: 100%;
   padding: 10px;
   border: none;
@@ -39,13 +38,13 @@
   cursor: pointer;
 }
 
-/* Style login button on hover */
-.login input[type="submit"]:hover {
+
+.authenticate input[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-/* Style register link */
-.login a {
+
+.authenticate a {
   display: block;
   text-align: center;
   margin-top: 10px;
