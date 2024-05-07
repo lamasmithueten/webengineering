@@ -32,18 +32,28 @@ function drawThreadsMainpage(){
 		    $arrayEntry["text"]
 		) .
 		"</div>";
-		echo "</div>"; // end of post
+		echo "</div>"; 
 
 		echo '<div class="user_info">';
 		echo '<div class="username">' . $arrayEntry["username"] . "</div>";
 		echo '<div class="timestamp">' .
 		$arrayEntry["timestamp"] .
 		"</div>";
-		echo "</div>"; // end of user_info
+		echo "</div>"; 
 
-		echo "</div>"; // end of thread
+		echo "</div>"; 
 		echo "<br>";
 	}
+}
+
+function drawThreadsPage($thread_id){
+	$con = openConnection();
+	$rows=fetchThread($con, $thread_id);
+	drawThread($rows);
+	drawSubmitComments($thread_id);
+	$rows=fetchAllComments($con, $thread_id);
+	closeConnection($con); 
+	drawComments($rows);
 }
 
 function drawThread($rows){
@@ -91,13 +101,4 @@ echo '<p>Comments</p>';
 	echo '</div>'; 
 }
 
-function drawThreadsPage($thread_id){
-	$con = openConnection();
-	$rows=fetchThread($con, $thread_id);
-	drawThread($rows);
-	drawSubmitComments($thread_id);
-	$rows=fetchAllComments($con, $thread_id);
-	closeConnection($con); 
-	drawComments($rows);
-}
 ?>
