@@ -13,11 +13,7 @@ $text = mysqli_real_escape_string($con, $_POST['text']);
 $name = $_SESSION['name'];
 
 $temp_file = $_FILES['image']['tmp_name'];
-$filesize = $_FILES['image']['size'];
-$filetime = filemtime($_FILES['image']['tmp_name']);
-$filename = md5($_FILES['image']['name'] . $filesize . $filetime );
-$imagepath= '/webserver/webengineering/pictures/';
-$fullpath= $imagepath . $filename;
+$filename = $_FILES['image']['name'];
 
 $sqlquery = "SELECT id FROM accounts WHERE username = ?";
 $stmt = $con->prepare($sqlquery);
@@ -31,6 +27,11 @@ $id = $id_array["id"];
 
 
 if($filename != NULL){
+$filesize = $_FILES['image']['size'];
+$filetime = filemtime($_FILES['image']['tmp_name']);
+$filename = md5($_FILES['image']['name'] . $filesize . $filetime );
+$imagepath= '/webserver/webengineering/pictures/';
+$fullpath= $imagepath . $filename;
 $sqlquery = "INSERT INTO threads (id, text, id_account, timestamp, picture_path, title) VALUES (NULL, ?, ?, now(), ?, ?)";
 $stmt = $con->prepare($sqlquery);
 $stmt->bind_param("siss", $text, $id, $filename , $title );
