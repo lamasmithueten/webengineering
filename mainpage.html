@@ -1,10 +1,7 @@
 <?php
 	include("php/redirect.php");
-	include("php/sql.php");
 	include("php/drawsite.php");
 
-	$con = openConnection();
-	$rows=fetchThreadsMainpage($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,11 +16,7 @@
 		<a href="submit.html">submit a new thread</a>
 	</div>
 <?php
-	drawThreadsMainpage($rows);
+	drawThreadsMainpage();
 ?>	
 </body>
 </html>
-
-<?php 
-	closeConnection($con);
-?>
