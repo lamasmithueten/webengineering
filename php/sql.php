@@ -88,6 +88,7 @@ function createUser($con, $username, $password, $email){
 		mail ($email, "Account aktiviert", $text );
 		echo "<h3>Account registriert<h3>";
 		echo nl2br ("\n$username\n $email\n ");
+		echo '<br><a href="index">Zurück zur Anmeldung</a><br>';
 	} 
 	else {
 		echo "ERROR: "
