@@ -46,4 +46,59 @@ function fetchAllComments($con, $thread_id){
 		$rows=$result->fetch_all(MYSQLI_ASSOC);
 		return $rows;
 }
+
+function checkUsernameTaken($con, $username){
+	$sqlquery = "SELECT username FROM accounts WHERE username = ?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("s", $username);
+	$stmt->execute();
+	$result = $stmt -> get_result();
+
+	if ($result ->num_rows>0){
+		echo "Username $username ist schon in Verwendung.";
+		echo '<br><a href="../register">Zurück zum Registrieren</a><br><a href="../index">Zurück zur Anmeldung</a><br>';
+		exit();
+	}
+}
+
+function checkEmailTaken($con, $email){
+	$sqlquery = "SELECT email FROM accounts WHERE email = ?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("s", $email);
+	$stmt->execute();
+	$result = $stmt -> get_result();
+
+
+	if ($result ->num_rows>0){
+		echo "Emailadresse $email ist schon in Verwendung.";
+		echo '<br><a href="../register">Zurück zum Registrieren</a><br><a href="index">Zurück zur Anmeldung</a><br>';
+		exit();
+	}
+}
+
+
+function createUser($con, $username, $password, $email){
+	$sqlquery = "INSERT INTO accounts (id, username, password, email) VALUES ( NULL, ?, ?, ?)" ;
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("sss", $username, $password, $email);
+
+
+	if($stmt->execute()){
+		$text = "Dein Account $username wurde erfolgreich erstellt.\n";
+		mail ($email, "Account aktiviert", $text );
+		echo "<h3>Account registriert<h3>";
+		echo nl2br ("\n$username\n $email\n ");
+	} 
+	else {
+		echo "ERROR: "
+		. $stmt->error;
+	}
+}
+
+
+
+
+
+
+
 ?>
