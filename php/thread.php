@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/thread.css">
 </head>
 <body>
-	<p>Thread</p>
+	<a href="index">Threads</a>
 <?php	
 drawThreadspage($thread_id);
 ?>
