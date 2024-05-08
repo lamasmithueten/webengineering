@@ -95,8 +95,20 @@ function createUser($con, $username, $password, $email){
 	}
 }
 
-
-
+function createComment($con, $thread_id, $comment, $account_id){
+	$sqlquery = "INSERT INTO comments (id, id_thread, text, timestamp, id_account) VALUES (NULL, ?, ?, now(), ?)";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("isi", $thread_id, $comment, $account_id);
+	if($stmt->execute()){
+		header("Location: https://webeng.mwerr.de/thread/$thread_id");
+		exit;
+	}
+	else{
+		echo "ERROR: "
+		. $stmt->error;
+	}
+	$stmt->close();
+}
 
 
 
