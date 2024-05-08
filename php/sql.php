@@ -110,7 +110,38 @@ function createComment($con, $thread_id, $comment, $account_id){
 	$stmt->close();
 }
 
+function submitThreadWithPicture($con, $text, $id, $filename, $title, $temp_file, $fullpath ){
+	$sqlquery = "INSERT INTO threads (id, text, id_account, timestamp, picture_path, title) VALUES (NULL, ?, ?, now(), ?, ?)";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("siss", $text, $id, $filename , $title );
 
+		if (move_uploaded_file( $temp_file, $fullpath )){
+			if ($stmt->execute()){
+			    header("Location: ../mainpage.html");
+				
+			}
+			else{
+				echo "ERROR: "
+				. $stmt->error;
+			}
 
+		} else {
+			echo "Failed to move your image.\n";	
+		}
+}
+
+function submitThreadWithoutPicture($con, $text, $id, $title){
+	$sqlquery = "INSERT INTO threads (id, text, id_account, timestamp, picture_path, title) VALUES (NULL, ?, ?, now(), NULL, ?)";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("sss", $text, $id, $title );
+		if ($stmt->execute()){
+		    header("Location: ../mainpage.html");
+			
+		}
+		else{
+			echo "ERROR: "
+			. $stmt->error;
+		}
+}
 
 ?>
