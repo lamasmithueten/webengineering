@@ -1,53 +1,98 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-
 .authenticate {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    width: 300px;
+    margin: 20px auto 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-
 
 .authenticate input[type="text"],
-.authenticate input[type="password"] {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-
+.authenticate input[type="password"],
 .authenticate input[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
+    width: calc(100% - 22px);
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-
-.authenticate input[type="submit"]:hover {
-  background-color: #0056b3;
+.authenticate input[type="submit"],
+.submit-link a {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
+.authenticate input[type="submit"]:hover,
+.submit-link a:hover {
+    background-color: #0056b3;
+}
 
 .authenticate a {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #007bff;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.thread,
+.submit-link {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.post {
+    display: flex;
+    align-items: flex-start;
+}
+
+.image {
+    margin-right: 10px;
+    max-width: 200px;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.image img {
+    width: 100%;
+    height: auto;
+}
+
+.text {
+    flex: 1;
+}
+
+.user_info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.timestamp {
+    color: #777;
 }
