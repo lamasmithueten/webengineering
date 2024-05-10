@@ -43,7 +43,7 @@ function fetchThread($con, $thread_id)
 
 function fetchAllComments($con, $thread_id)
 {
-	$sqlquery = "select accounts.username, comments.text, comments.timestamp from accounts join comments on accounts.id=comments.id_account join threads on comments.id_thread=threads.id where threads.id=?";
+	$sqlquery = "select accounts.username, comments.text, comments.timestamp, comments.id_account, comments.id from accounts join comments on accounts.id=comments.id_account join threads on comments.id_thread=threads.id where threads.id=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("s", $thread_id);
 	$stmt->execute();
@@ -150,6 +150,13 @@ function submitThreadWithoutPicture($con, $text, $id, $title)
 		echo "ERROR: "
 			. $stmt->error;
 	}
+}
+
+function deleteComment($con, $comment_to_delete){
+	$sqlquery = "DELETE FROM comments WHERE id=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $comment_to_delete);
+	$stmt->execute();
 }
 
 ?>

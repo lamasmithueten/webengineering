@@ -7,4 +7,4 @@ RewriteRule ^([^\.]+)$ $1.html [NC,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^thread/([^/]+)$ php/thread.php?variable=$1 [L]
-ErrorDocument 404 /404.php
+#ErrorDocument 404 /404.php

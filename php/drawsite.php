@@ -55,7 +55,7 @@ function drawThreadsPage($thread_id)
 	drawSubmitComments($thread_id);
 	$rows = fetchAllComments($con, $thread_id);
 	closeConnection($con);
-	drawComments($rows);
+	drawComments($rows, $thread_id);
 }
 
 function drawThread($rows)
@@ -90,7 +90,7 @@ function drawSubmitComments($thread_id)
 	echo '</div>';
 }
 
-function drawComments($rows)
+function drawComments($rows, $thread_id)
 {
 	echo '<div class="comments">';
 	echo '<p>Comments</p>';
@@ -100,6 +100,13 @@ function drawComments($rows)
 		echo '<div class="comment-info">';
 		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
+		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
+		    echo '<form action="https://webeng.mwerr.de/php/delete_comment.php" method="post">';
+		    echo '<input type="hidden" name="comment_id" value="' . $arrayEntry['id'] . '">';
+		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
+		    echo '<button type="submit">Delete</button>';
+		    echo '</form>';
+		}
 		echo '</div>';
 		echo '</div>';
 	}
