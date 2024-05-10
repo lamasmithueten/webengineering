@@ -170,10 +170,24 @@ function deleteAllComments($con, $comments_to_delete){
 
 function deleteThread($con, $thread_to_delete){
 	deleteAllComments($con, $thread_to_delete);
+	deletePic($con, $thread_to_delete);
 	$sqlquery = "DELETE FROM threads WHERE id=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("i", $thread_to_delete);
 	$stmt->execute();
+}
+
+function deletePic($con, $thread_id){
+	$sqlquery = "SELECT picture_path FROM threads WHERE id = ?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("s", $thread_id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	if ($result->num_rows > 0) {
+		$row = $result->fetch_assoc();
+		$file= "/webserver/webengineering/pictures/" . $row["picture_path"];
+		unlink($file);
+	}
 }
 
 
