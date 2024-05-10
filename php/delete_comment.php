@@ -1,4 +1,5 @@
 <?php
+include("redirect.php");
 include("sql.php");
 
 $con = openConnection();

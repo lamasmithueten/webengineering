@@ -13,7 +13,7 @@ function openConnection()
 
 function fetchThreadsMainpage($con)
 {
-	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id FROM accounts JOIN threads ON accounts.id = threads.id_account order by timestamp DESC";
+	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id, threads.id_account FROM accounts JOIN threads ON accounts.id = threads.id_account order by timestamp DESC";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->execute();
 	$result = $stmt->get_result();
@@ -28,7 +28,7 @@ function closeConnection($con)
 
 function fetchThread($con, $thread_id)
 {
-	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id FROM accounts JOIN threads ON accounts.id = threads.id_account WHERE threads.id = ?";
+	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id, threads.id_account FROM accounts JOIN threads ON accounts.id = threads.id_account WHERE threads.id = ?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("s", $thread_id);
 	$stmt->execute();
@@ -158,5 +158,23 @@ function deleteComment($con, $comment_to_delete){
 	$stmt->bind_param("i", $comment_to_delete);
 	$stmt->execute();
 }
+
+
+
+function deleteAllComments($con, $comments_to_delete){
+	$sqlquery = "DELETE FROM comments WHERE id_thread=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $comments_to_delete);
+	$stmt->execute();
+}
+
+function deleteThread($con, $thread_to_delete){
+	deleteAllComments($con, $thread_to_delete);
+	$sqlquery = "DELETE FROM threads WHERE id=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $thread_to_delete);
+	$stmt->execute();
+}
+
 
 ?>

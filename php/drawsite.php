@@ -41,6 +41,12 @@ function drawThreadsMainpage()
 			$arrayEntry["timestamp"] .
 			"</div>";
 		echo "</div>";
+		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
+			echo '<form action="https://webeng.mwerr.de/php/delete_thread.php" method="post">';
+			echo '<input type="hidden" name="thread_id" value="' . $arrayEntry["id"] . '">';
+			echo '<button type="submit">Delete</button>';
+			echo '</form>';
+		}
 
 		echo "</div>";
 		echo "<br>";
@@ -51,14 +57,14 @@ function drawThreadsPage($thread_id)
 {
 	$con = openConnection();
 	$rows = fetchThread($con, $thread_id);
-	drawThread($rows);
+	drawThread($rows, $thread_id);
 	drawSubmitComments($thread_id);
 	$rows = fetchAllComments($con, $thread_id);
 	closeConnection($con);
 	drawComments($rows, $thread_id);
 }
 
-function drawThread($rows)
+function drawThread($rows, $thread_id)
 {
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<div class="thread">';
@@ -74,6 +80,12 @@ function drawThread($rows)
 		echo '<div class="username">' . $arrayEntry['username'] . '</div>';
 		echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
 		echo '</div>';
+		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
+		    echo '<form action="https://webeng.mwerr.de/php/delete_thread.php" method="post">';
+		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
+		    echo '<button type="submit">Delete</button>';
+		    echo '</form>';
+		}
 		echo '</div>';
 	}
 
