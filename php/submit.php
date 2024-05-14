@@ -19,7 +19,7 @@ if($filename != NULL){
 	$filesize = $_FILES['image']['size'];
 	$filetime = filemtime($_FILES['image']['tmp_name']);
 	$filename = md5($_FILES['image']['name'] . $filesize . $filetime );
-	$imagepath= '/webserver/webengineering/pictures/';
+	$imagepath= __DIR__ . "/../pictures/";
 	$fullpath= $imagepath . $filename;
 
 	submitThreadWithPicture($con, $text, $id, $filename, $title, $temp_file, $fullpath);

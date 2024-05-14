@@ -185,7 +185,7 @@ function deletePic($con, $thread_id){
 	$result = $stmt->get_result();
 	if ($result->num_rows > 0) {
 		$row = $result->fetch_assoc();
-		$file= "/webserver/webengineering/pictures/" . $row["picture_path"];
+		$file=  __DIR__ . "/../pictures/" . $row["picture_path"];
 		unlink($file);
 	}
 }
