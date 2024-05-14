@@ -7,7 +7,7 @@ $con = openConnection();
 $thread_to_delete = $_POST['thread_id'];
 deleteThread($con, $thread_to_delete);
 closeConnection($con);
-header("Location: https://webeng.mwerr.de/mainpage");
+header("Location: ../index");
 exit();
 
 ?>

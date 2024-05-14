@@ -1,1 +1,1 @@
-<?php header("Location: https://webeng.mwerr.de/")?>
+<?php header("Location: .")?>

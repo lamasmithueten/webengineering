@@ -9,7 +9,7 @@ function drawThreadsMainpage()
 	closeConnection($con);
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<div class="thread">';
-		echo '<div class="title"><a href="https://webeng.mwerr.de/thread/' .
+		echo '<div class="title"><a href="thread/' .
 			$arrayEntry["id"] .
 			'">';
 		echo str_replace(
@@ -22,7 +22,7 @@ function drawThreadsMainpage()
 		echo '<div class="post">';
 		if (isset($arrayEntry["picture_path"])) {
 			$image = $arrayEntry["picture_path"];
-			echo '<div class="image"><img src="https://webeng.mwerr.de/pictures/' .
+			echo '<div class="image"><img src="../pictures/' .
 				$image .
 				'"></div>';
 		}
@@ -42,7 +42,7 @@ function drawThreadsMainpage()
 			"</div>";
 		echo "</div>";
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
-			echo '<form action="https://webeng.mwerr.de/php/delete_thread.php" method="post">';
+			echo '<form action="php/delete_thread.php" method="post">';
 			echo '<input type="hidden" name="thread_id" value="' . $arrayEntry["id"] . '">';
 			echo '<button type="submit">Delete</button>';
 			echo '</form>';
@@ -72,7 +72,7 @@ function drawThread($rows, $thread_id)
 		echo '<div class="post">';
 		if (isset($arrayEntry['picture_path'])) {
 			$image = $arrayEntry['picture_path'];
-			echo '<div class="image"><img src="https://webeng.mwerr.de/pictures/' . $image . '"></div>';
+			echo '<div class="image"><img src="../pictures/' . $image . '"></div>';
 		}
 		echo '<div class="text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
 		echo '</div>';
@@ -81,7 +81,7 @@ function drawThread($rows, $thread_id)
 		echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
 		echo '</div>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
-		    echo '<form action="https://webeng.mwerr.de/php/delete_thread.php" method="post">';
+		    echo '<form action="delete_thread.php" method="post">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
 		    echo '<button type="submit">Delete</button>';
 		    echo '</form>';
@@ -94,7 +94,7 @@ function drawSubmitComments($thread_id)
 {
 	echo '<div class="comment-form">';
 	echo '<p>Submit a comment</p>';
-	echo '<form action="https://webeng.mwerr.de/php/submit_comment.php" method="post" enctype="multipart/form-data">';
+	echo '<form action="../php/submit_comment.php" method="post" enctype="multipart/form-data">';
 	echo '<textarea id="comment" name="comment" maxlength="65535" required></textarea>';
 	echo '<input type="hidden" name="threadid" id="threadid" value="' . $thread_id . '"/>';
 	echo '<input type="submit" value="submit"/>';
@@ -113,7 +113,7 @@ function drawComments($rows, $thread_id)
 		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
-		    echo '<form action="https://webeng.mwerr.de/php/delete_comment.php" method="post">';
+		    echo '<form action="../php/delete_comment.php" method="post">';
 		    echo '<input type="hidden" name="comment_id" value="' . $arrayEntry['id'] . '">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
 		    echo '<button type="submit">Delete</button>';

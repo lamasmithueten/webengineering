@@ -34,7 +34,7 @@ function fetchThread($con, $thread_id)
 	$stmt->execute();
 	$result = $stmt->get_result();
 	if ($result->num_rows == 0) {
-		header("Location: https://webeng.mwerr.de/");
+		header("Location: ../index");
 		exit;
 	}
 	$rows = $result->fetch_all(MYSQLI_ASSOC);
@@ -109,7 +109,7 @@ function createComment($con, $thread_id, $comment, $account_id)
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("isi", $thread_id, $comment, $account_id);
 	if ($stmt->execute()) {
-		header("Location: https://webeng.mwerr.de/thread/$thread_id");
+		header("Location: /thread/$thread_id");
 		exit;
 	} else {
 		echo "ERROR: "
