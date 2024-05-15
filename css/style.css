@@ -128,6 +128,8 @@ body {
         height: auto;
     }
 
+
+
 .text,
 .comment-text {
     flex: 1;
@@ -151,12 +153,14 @@ body {
     float: right;
 }
 
-.comment-form {
+.comment-form,
+.comments p{
     margin: 20px 0;
     padding: 10px;
 }
 
-    .comment-form p {
+    .comment-form p,
+    .comments p{
         font-size: 20px;
         font-weight: bold;
         text-align: left;
