@@ -61,18 +61,37 @@ body {
         color: #007bff;
     }
 
-/* Styles für die Hauptseite */
-.thread,
-.submit-link {
+/* Styles für die Hauptseite und die Threads*/
+.thread {
+    position: relative;
     border: 1px solid #ccc;
-    margin-bottom: 10px;
+    margin: 10px;
     padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.submit-link {
+    margin: 10px 0 10px 10px;
 }
 
 .title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+.title a {
+    color: #0056b3;
+    text-decoration: none;
 }
 
 .post {
@@ -108,9 +127,10 @@ body {
 
 .timestamp {
     color: #777;
+    float: right;
 }
 
-/* Styles für das Einreichen von Beiträgen */
+/* Styles für das Erstellen von Threads */
 .container {
     max-width: 600px;
     margin: 0 auto;

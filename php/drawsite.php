@@ -42,7 +42,7 @@ function drawThreadsMainpage()
 			"</div>";
 		echo "</div>";
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
-			echo '<form action="php/delete_thread.php" method="post">';
+			echo '<form class="delete-button" action="php/delete_thread.php" method="post">';
 			echo '<input type="hidden" name="thread_id" value="' . $arrayEntry["id"] . '">';
 			echo '<button type="submit">Delete</button>';
 			echo '</form>';
