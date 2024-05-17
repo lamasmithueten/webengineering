@@ -16,6 +16,11 @@
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
 		header('location:mainpage');
 	} else {
+		$popUpStyle = "display: none;";
+		if(isset($_GET['wrongData']))
+		{
+			$popUpStyle = "display: flex;";
+		}
 		?>
 		<div class="authenticate">
 			<h1>Login</h1>
@@ -34,6 +39,17 @@
 				<a href="register.html">register new account</a>
 			</div>
 		</div>
+
+		<div class="loginPopup" id="popup" style="<?php echo $popUpStyle; ?>">
+			<div class="message">Falsche Email oder falsches Passwort!</div>
+			<button class="close-btn" onclick="closePopup()">×</button>
+		</div>
+	
+		<script>
+			function closePopup() {
+				document.getElementById('popup').style.display = 'none';
+			}
+		</script>
 	<?php } ?>
 </body>
 
