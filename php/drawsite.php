@@ -7,6 +7,12 @@ function drawThreadsMainpage()
 	$con = openConnection();
 	$rows = fetchThreadsMainpage($con);
 	closeConnection($con);
+	echo '<div class="banner">';
+	echo '<div class="submit-link">';
+	echo '	<a href="submit.html">submit a new thread</a>';
+	echo '</div>';
+	drawLogoutButton();
+	echo '</div>';
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<div class="thread">';
 		echo '<div class="title"><a href="thread/' .
@@ -57,6 +63,11 @@ function drawThreadsPage($thread_id)
 {
 	$con = openConnection();
 	$rows = fetchThread($con, $thread_id);
+	echo '<div class="banner">';
+	echo '<a href="index.html" class="index-link">Threads</a>';
+	drawLogoutButton();
+	echo '</div>';
+	
 	drawThread($rows, $thread_id);
 	drawSubmitComments($thread_id);
 	$rows = fetchAllComments($con, $thread_id);
@@ -122,6 +133,19 @@ function drawComments($rows, $thread_id)
 		echo '</div>';
 		echo '</div>';
 	}
+	echo '</div>';
+}
+
+function drawLogoutButton(){
+	echo '<div class="logout-button">';
+	if ($_SERVER['REQUEST_URI']=="/mainpage"){
+		echo '<form class="logout-button" action="php/logout.php" method="post">';
+	}
+	else{
+		echo '<form class="logout-button" action="../php/logout.php" method="post">';
+	}
+	echo '<button type="submit">Logout</button>';
+	echo '</form>';
 	echo '</div>';
 }
 
