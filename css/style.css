@@ -36,7 +36,7 @@ body {
     }
 
     .authenticate input[type="submit"],
-    .submit-link a,
+    .banner a,
     .container input[type="submit"] {
         display: inline-block;
         padding: 8px 16px;
@@ -49,9 +49,10 @@ body {
 
         .container input[type="submit"]:hover,
         .authenticate input[type="submit"]:hover,
-        .submit-link a:hover,
         .comment-form input[type="submit"]:hover,
-        .delete-button button:hover{
+        .delete-button button:hover,
+        .logout-button button:hover,
+        .banner a:hover {
             background-color: #0056b3;
         }
 
@@ -74,7 +75,8 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-.delete-button {
+.delete-button,
+.logout-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -82,7 +84,8 @@ body {
     padding-top: 0;
 }
 
-.delete-button button {
+.delete-button button,
+.logout-button button {
     padding: 4px 8px;
     background-color: #007bff;
     color: #fff;
@@ -92,12 +95,12 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.submit-link {
-    margin: 10px 0 10px 10px;
+.logout-button {
+    margin-top: -5px;
 }
 
-.index-link {
-    padding-left: 10px;
+.banner {
+    margin: 10px 0 10px 10px;
 }
 
 .title {
