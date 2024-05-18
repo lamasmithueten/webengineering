@@ -10,13 +10,13 @@
   <div class="container">
 	<h1>Submit a new thread</h1>
 	<form action="php/submit.php" method="post" enctype="multipart/form-data">
-	<input type="text" name="title" placeholder="Title" id="title" maxlength="255" required/>
-	<textarea id="text" name="text" placeholder="Text" maxlength="65535" required></textarea>
-	<input type="file" name="image" accept="image/png, image/gif, image/jpeg"/>
-        <div class="centered">
-            <input type="submit" value="Submit"/>
-        </div>
+		<input type="text" name="title" placeholder="Title" id="title" maxlength="255" required/>
+		<textarea id="text" name="text" placeholder="Text" maxlength="65535" required></textarea>
+		<input type="file" name="image" accept="image/png, image/gif, image/jpeg"/>
+		<div class="button-group">
+			<input type="submit" value="Submit" />
+			<a href="index.html" class="threads-link">Cancel</a>
+		</div>
 	</form>
-  </div>
 </body>
 </html>
