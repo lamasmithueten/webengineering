@@ -12,6 +12,7 @@ function drawThreadsMainpage()
 	echo '	<a href="submit.html">submit a new thread</a>';
 	echo '</div>';
 	drawLogoutButton();
+	drawThemeSlider();
 	echo '</div>';
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<div class="thread">';
@@ -66,6 +67,7 @@ function drawThreadsPage($thread_id)
 	echo '<div class="banner">';
 	echo '<a href="index.html" class="index-link">Threads</a>';
 	drawLogoutButton();
+	drawThemeSlider();
 	echo '</div>';
 	
 	drawThread($rows, $thread_id);
@@ -73,6 +75,8 @@ function drawThreadsPage($thread_id)
 	$rows = fetchAllComments($con, $thread_id);
 	closeConnection($con);
 	drawComments($rows, $thread_id);
+
+	echo '<script src="../js/switchTheme.js"></script>';
 }
 
 function drawThread($rows, $thread_id)
@@ -146,6 +150,15 @@ function drawLogoutButton(){
 	}
 	echo '<button type="submit">Logout</button>';
 	echo '</form>';
+	echo '</div>';
+}
+
+function drawThemeSlider(){
+	echo '<div class="theme-slider">';
+	echo '<label class="switch">';
+	echo '<input type="checkbox" id="themeSwitch">';
+	echo '<span class="slider round"></span>';
+	echo '</label>';
 	echo '</div>';
 }
 

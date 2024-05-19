@@ -1,48 +1,56 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Register</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script src="js/authenticationPopup.js"></script>
-	</head>
-	<body>
-		<?php
-			$popUpStyle = "display: none;";
-			$errorMessage = "";
-			if(isset($_GET['message']))
-			{
-				$errorMessage = $_GET['message'];
-				$popUpStyle = "display: flex;";
-			}
-		?>
-		<div class="authenticate">
-			<h1>Register</h1>
-			<form action="php/register.php" method="post">
-				<p>
-					<label for="email"><label>
-					<input type="text" name="email" id="email" placeholder="Email" maxlength="100" required>
-				</p>
-				<p>
-					<label for="username">
-					<label>
-					<input type="text" name="username" id="username" placeholder="Username" maxlength="50" required>
-				</p>
-				<p>
-					<label for="password">
-					<label>
-					<input type="password" name="password" id="password" placeholder="Password" required>
-				</p>
-				<p><input type="submit" value="Submit"></p>
-			</form>
-			<div class="login-link">
-				<a href="index">back to login</a>
-			</div>
+<head>
+	<meta charset="utf-8">
+	<title>Register</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/authenticationPopup.js"></script>
+</head>
+<body>
+	<?php
+	$popUpStyle = "display: none;";
+	$errorMessage = "";
+	if(isset($_GET['message']))
+	{
+	$errorMessage = $_GET['message'];
+	$popUpStyle = "display: flex;";
+	}
+	?>
+	<div class="authenticate">
+		<h1>Register</h1>
+		<div class="slider-position">
+			<label class="switch">
+				<input type="checkbox" id="themeSwitch">
+				<span class="slider round"></span>
+			</label>
 		</div>
+		<form action="php/register.php" method="post">
+			<p>
+				<label for="email">
+					<label>
+						<input type="text" name="email" id="email" placeholder="Email" maxlength="100" required>
+			</p>
+			<p>
+				<label for="username">
+					<label>
+						<input type="text" name="username" id="username" placeholder="Username" maxlength="50" required>
+			</p>
+			<p>
+				<label for="password">
+					<label>
+						<input type="password" name="password" id="password" placeholder="Password" required>
+			</p>
+			<p><input type="submit" value="Submit"></p>
+		</form>
+		<div class="login-link">
+			<a href="index">back to login</a>
+		</div>
+	</div>
 
-		<div class="authenticationPopup" id="popup" style="<?php echo $popUpStyle; ?>">
-			<div class="message"><?php echo $errorMessage ?></div>
-			<button class="close-btn" onclick="closePopup()">×</button>
-		</div>
-	</body>
+	<div class="authenticationPopup" id="popup" style="<?php echo $popUpStyle; ?>">
+		<div class="message"><?php echo $errorMessage ?></div>
+		<button class="close-btn" onclick="closePopup()">×</button>
+	</div>
+	<script src="js/switchTheme.js"></script>
+</body>
 </html>

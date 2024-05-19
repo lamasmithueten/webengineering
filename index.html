@@ -15,39 +15,46 @@
 <body>
 	<?php
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
-		header('location:mainpage');
+	header('location:mainpage');
 	} else {
-			$popUpStyle = "display: none;";
-			$errorMessage = "";
-			if(isset($_GET['message']))
-			{
-				$errorMessage = $_GET['message'];
-				$popUpStyle = "display: flex;";
-			}
-		?>
-		<div class="authenticate">
-			<h1>Login</h1>
-			<form action="php/authenticate.php" method="post">
-				<label for="username">
-					<i class="fas fa-user"></i>
-				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<input type="submit" value="Login">
-			</form>
-			<div class="register-link">
-				<a href="register.html">register new account</a>
-			</div>
+	$popUpStyle = "display: none;";
+	$errorMessage = "";
+	if(isset($_GET['message']))
+	{
+	$errorMessage = $_GET['message'];
+	$popUpStyle = "display: flex;";
+	}
+	?>
+	<div class="authenticate">
+		<h1>Login</h1>
+		<div class="slider-position">
+			<label class="switch">
+				<input type="checkbox" id="themeSwitch">
+				<span class="slider round"></span>
+			</label>
 		</div>
+		<form action="php/authenticate.php" method="post">
+			<label for="username">
+				<i class="fas fa-user"></i>
+			</label>
+			<input type="text" name="username" placeholder="Username" id="username" required>
+			<label for="password">
+				<i class="fas fa-lock"></i>
+			</label>
+			<input type="password" name="password" placeholder="Password" id="password" required>
+			<input type="submit" value="Login">
+		</form>
+		<div class="register-link">
+			<a href="register.html">register new account</a>
+		</div>
+	</div>
 
-		<div class="authenticationPopup" id="popup" style="<?php echo $popUpStyle; ?>">
-			<div class="message"><?php echo $errorMessage; ?></div>
-			<button class="close-btn" onclick="closePopup()">×</button>
-		</div>
+	<div class="authenticationPopup" id="popup" style="<?php echo $popUpStyle; ?>">
+		<div class="message"><?php echo $errorMessage; ?></div>
+		<button class="close-btn" onclick="closePopup()">×</button>
+	</div>
 	<?php } ?>
+	<script src="js/switchTheme.js"></script>
 </body>
 
 </html>

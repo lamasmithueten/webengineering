@@ -6,8 +6,30 @@
     font-family: Arial, sans-serif;
 }
 
+:root {
+    --color-bg: #ffffff;
+    --color-text: #000000;
+}
+
+body.dark {
+    background-color: #1A1A1A;
+    color: #F5F5F5;
+}
+
+    body.dark .thread,
+    body.dark .post,
+    body.dark .comment,
+    body.dark textarea,
+    body.dark input[type="text"],
+    body.dark input[type="password"] {
+        background-color: #2B2B2B;
+        color: #F5F5F5;
+    }
+
 body {
     font-family: Arial, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
 /* Styles für Login und Registrierung */
@@ -80,7 +102,8 @@ body {
 }
 
 .delete-button,
-.logout-button {
+.logout-button,
+.slider-position {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -88,16 +111,16 @@ body {
     padding-top: 0;
 }
 
-.delete-button button,
-.logout-button button {
-    padding: 4px 8px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    .delete-button button,
+    .logout-button button {
+        padding: 4px 8px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
 .logout-button {
     margin-top: -5px;
@@ -105,6 +128,9 @@ body {
 
 .banner {
     margin: 10px 0 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .title {
@@ -161,13 +187,13 @@ body {
 }
 
 .comment-form,
-.comments p{
+.comments p {
     margin: 20px 0;
     padding: 10px;
 }
 
     .comment-form p,
-    .comments p{
+    .comments p {
         font-size: 20px;
         font-weight: bold;
         text-align: left;
@@ -182,7 +208,7 @@ body {
 
     .comment-form form {
         display: flex;
-        flex-direction:column;
+        flex-direction: column;
     }
 
     .comment-form input[type="submit"] {
@@ -248,19 +274,70 @@ input[type="file"] {
     z-index: 1000;
 }
 
-.authenticationPopup .message {
-    flex-grow: 1;
+    /* Styles für das Popup */
+    .authenticationPopup .message {
+        flex-grow: 1;
+    }
+
+    .authenticationPopup .close-btn {
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0 10px;
+    }
+
+        .authenticationPopup .close-btn:hover {
+            color: #ff0000;
+        }
+
+/* Styles für das Theme-Icon */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 23px;
 }
 
-.authenticationPopup .close-btn {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    font-size: 20px;
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
     cursor: pointer;
-    padding: 0 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #007bff;
+    transition: .4s;
 }
 
-.authenticationPopup .close-btn:hover {
-    color: #ff0000;
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 15px;
+        width: 15px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #ff8400;
+}
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
+
+.theme-slider {
+    margin-right: 90px;
+    margin-top: -10px;
 }
