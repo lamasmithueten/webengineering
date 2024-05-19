@@ -93,7 +93,7 @@ function createUser($con, $username, $password, $email)
 	if ($stmt->execute()) {
 		$text = "Dein Account $username wurde erfolgreich erstellt.\n";
 		mail($email, "Account aktiviert", $text);
-		redirectLogin("Dein Account $username wurde erfolgreich erstellt.\n$username\n $email");
+		redirectLogin("Dein Account $username wurde erfolgreich erstellt.");
 	} else {
 		echo "ERROR: "
 			. $stmt->error;
