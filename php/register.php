@@ -15,7 +15,7 @@ $email = mysqli_real_escape_string($con, $_POST['email']);
 
 function checkValidEmail($con, $email ){
 	if( !filter_var ($email, FILTER_VALIDATE_EMAIL ) ){
-		echo "Emailadresse $email ist keine gültige Emailadresse.\n";
+		redirectRegistration("Emailadresse $email ist keine gültige Emailadresse.\n");
 		exit();
 	}
 }

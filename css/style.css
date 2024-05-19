@@ -230,7 +230,7 @@ input[type="file"] {
     font-size: 16px;
 }
 
-.loginPopup {
+.authenticationPopup {
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -248,11 +248,11 @@ input[type="file"] {
     z-index: 1000;
 }
 
-.loginPopup .message {
+.authenticationPopup .message {
     flex-grow: 1;
 }
 
-.loginPopup .close-btn {
+.authenticationPopup .close-btn {
     background-color: transparent;
     border: none;
     color: #fff;
@@ -261,6 +261,6 @@ input[type="file"] {
     padding: 0 10px;
 }
 
-.loginPopup .close-btn:hover {
+.authenticationPopup .close-btn:hover {
     color: #ff0000;
 }

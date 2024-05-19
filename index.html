@@ -9,7 +9,7 @@
 	<meta charset="utf-8">
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script src="js/index.js"></script>
+	<script src="js/authenticationPopup.js"></script>
 </head>
 
 <body>
@@ -17,11 +17,13 @@
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
 		header('location:mainpage');
 	} else {
-		$popUpStyle = "display: none;";
-		if(isset($_GET['wrongData']))
-		{
-			$popUpStyle = "display: flex;";
-		}
+			$popUpStyle = "display: none;";
+			$errorMessage = "";
+			if(isset($_GET['message']))
+			{
+				$errorMessage = $_GET['message'];
+				$popUpStyle = "display: flex;";
+			}
 		?>
 		<div class="authenticate">
 			<h1>Login</h1>
@@ -41,8 +43,8 @@
 			</div>
 		</div>
 
-		<div class="loginPopup" id="popup" style="<?php echo $popUpStyle; ?>">
-			<div class="message">Falscher Username und/oder falsches Passwort!</div>
+		<div class="authenticationPopup" id="popup" style="<?php echo $popUpStyle; ?>">
+			<div class="message"><?php echo $errorMessage; ?></div>
 			<button class="close-btn" onclick="closePopup()">×</button>
 		</div>
 	<?php } ?>

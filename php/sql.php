@@ -1,4 +1,5 @@
 <?php
+include("authenticationRedirect.php");
 
 function openConnection()
 {
@@ -61,8 +62,7 @@ function checkUsernameTaken($con, $username)
 	$result = $stmt->get_result();
 
 	if ($result->num_rows > 0) {
-		echo "Username $username ist schon in Verwendung.";
-		echo '<br><a href="../register">Zurück zum Registrieren</a><br><a href="../index">Zurück zur Anmeldung</a><br>';
+		redirectRegistration("Username $username ist schon in Verwendung.");
 		exit();
 	}
 }
@@ -77,8 +77,7 @@ function checkEmailTaken($con, $email)
 
 
 	if ($result->num_rows > 0) {
-		echo "Emailadresse $email ist schon in Verwendung.";
-		echo '<br><a href="../register">Zurück zum Registrieren</a><br><a href="index">Zurück zur Anmeldung</a><br>';
+		redirectRegistration("Emailadresse $email ist schon in Verwendung.");
 		exit();
 	}
 }
@@ -94,9 +93,7 @@ function createUser($con, $username, $password, $email)
 	if ($stmt->execute()) {
 		$text = "Dein Account $username wurde erfolgreich erstellt.\n";
 		mail($email, "Account aktiviert", $text);
-		echo "<h3>Account registriert<h3>";
-		echo nl2br("\n$username\n $email\n ");
-		echo '<br><a href="../index">Zurück zur Anmeldung</a><br>';
+		redirectLogin("Dein Account $username wurde erfolgreich erstellt.\n$username\n $email");
 	} else {
 		echo "ERROR: "
 			. $stmt->error;

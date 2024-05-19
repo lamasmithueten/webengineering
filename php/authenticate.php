@@ -19,11 +19,6 @@ function redirect()
 	header('location:../mainpage');
 }
 
-function redirectWrongUserData()
-{
-	header("Location:../index?wrongData=true");
-}
-
 function createSession()
 {
 	global $con, $id, $password;
@@ -43,11 +38,11 @@ function createSession()
 				redirect();
 			} else {
 				//echo 'Incorrect password!';
-				redirectWrongUserData();
+				redirectLogin("Falscher Username und/oder falsches Passwort!");
 			}
 		} else {
 			//echo 'Incorrect username!';
-			redirectWrongUserData();
+			redirectLogin("Falscher Username und/oder falsches Passwort!");
 		}
 		$stmt->close();
 	}
