@@ -1,22 +1,8 @@
 <?php
-    function redirectRegistration($message)
+    function redirectSuccessfulRegistration($message)
     {
-        if(is_null($message))
-        {
-            header("Location:../register");
-        } else {
-            header("Location:../register?message=$message");
-        }
-    }
-
-    function redirectLogin($message)
-    {
-        if(is_null($message))
-        {
-            header("Location:../index");
-        } else {
-            header("Location:../index?message=$message");
-        }
+        $_SESSION['success'] = $message;
+        header("Location:../index");
     }
 
     function addPostErrormessage($errorMessage){

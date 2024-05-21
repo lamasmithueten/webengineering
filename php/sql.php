@@ -62,9 +62,9 @@ function checkUsernameTaken($con, $username)
 	$result = $stmt->get_result();
 
 	if ($result->num_rows > 0) {
-		addPostErrormessage("Username $username ist schon in Verwendung.");
-		exit();
+		return true;
 	}
+	return false;
 }
 
 function checkEmailTaken($con, $email)
@@ -77,9 +77,9 @@ function checkEmailTaken($con, $email)
 
 
 	if ($result->num_rows > 0) {
-		addPostErrormessage("Emailadresse $email ist schon in Verwendung.");
-		exit();
+		return true;
 	}
+	return false;
 }
 
 
@@ -93,10 +93,11 @@ function createUser($con, $username, $password, $email)
 	if ($stmt->execute()) {
 		$text = "Dein Account $username wurde erfolgreich erstellt.\n";
 		mail($email, "Account aktiviert", $text);
-		redirectLogin("Dein Account $username wurde erfolgreich erstellt.");
+		return true;
 	} else {
 		echo "ERROR: "
 			. $stmt->error;
+			return false;
 	}
 }
 
