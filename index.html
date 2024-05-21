@@ -1,6 +1,7 @@
 <?php
 	session_name("webeng_mwerr");
 	session_start();
+	include_once("php/authenticate.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,22 +10,23 @@
 	<meta charset="utf-8">
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript"
-		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="js/authenticationPopup.js"></script>
 </head>
 
 <body>
 	<?php
+	$popUpStyle = "display: none;";
+	$errorMessage = "";
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
 	header('location:mainpage');
 	} else {
-	$popUpStyle = "display: none;";
-	$errorMessage = "";
-	if(isset($_GET['message']))
-	{
-	$errorMessage = $_GET['message'];
-	$popUpStyle = "display: flex;";
+		if(isset($_POST['username'])){
+		authenticate();
+		if(isset($_POST['errorMessage'])){
+			$errorMessage = $_POST['errorMessage'];
+			$popUpStyle = "display: flex;";
+		}
 	}
 	?>
 	<div class="authenticate">
@@ -35,7 +37,7 @@
 				<span class="slider round"></span>
 			</label>
 		</div>
-		<form action="php/authenticate.php" method="post">
+		<form action="" method="post">
 			<label for="username">
 				<i class="fas fa-user"></i>
 			</label>
@@ -52,7 +54,9 @@
 	</div>
 
 	<div class="authenticationPopup" id="popup" style="<?php echo $popUpStyle; ?>">
-		<div class="message"><?php echo $errorMessage; ?></div>
+		<div class="message">
+			<?php echo $errorMessage; ?>
+		</div>
 		<button class="close-btn" onclick="closePopup()">×</button>
 	</div>
 	<?php } ?>

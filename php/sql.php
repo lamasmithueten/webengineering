@@ -62,7 +62,7 @@ function checkUsernameTaken($con, $username)
 	$result = $stmt->get_result();
 
 	if ($result->num_rows > 0) {
-		redirectRegistration("Username $username ist schon in Verwendung.");
+		addPostErrormessage("Username $username ist schon in Verwendung.");
 		exit();
 	}
 }
@@ -77,7 +77,7 @@ function checkEmailTaken($con, $email)
 
 
 	if ($result->num_rows > 0) {
-		redirectRegistration("Emailadresse $email ist schon in Verwendung.");
+		addPostErrormessage("Emailadresse $email ist schon in Verwendung.");
 		exit();
 	}
 }

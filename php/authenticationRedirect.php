@@ -18,4 +18,8 @@
             header("Location:../index?message=$message");
         }
     }
+
+    function addPostErrormessage($errorMessage){
+        $_POST['errorMessage'] = $errorMessage;
+    }
 ?>
