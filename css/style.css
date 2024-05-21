@@ -26,6 +26,30 @@ body.dark {
         color: #F5F5F5;
     }
 
+    body.dark .authenticate input[type="submit"],
+    body.dark .container input[type="submit"],
+    body.dark .threads-link,
+    body.dark .input[type="submit"],
+    body.dark .delete-button button,
+    body.dark .logout-button button,
+    body.dark .comment-form input[type="submit"],
+    body.dark .banner a {
+        background-color: #ff8400;
+    }
+
+    body.dark .authenticate input[type="submit"]:hover,
+    body.dark .container input[type="submit"]:hover,
+    body.dark .threads-link:hover,
+    body.dark .input[type="submit"]:hover,
+    body.dark .delete-button button:hover,
+    body.dark .logout-button button:hover,
+    body.dark .comment-form input[type="submit"]:hover,
+    body.dark .banner a:hover {
+        background-color: #b35900;
+    }
+
+        
+
 body {
     font-family: Arial, sans-serif;
     background-color: var(--color-bg);
