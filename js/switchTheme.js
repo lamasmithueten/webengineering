@@ -1,4 +1,4 @@
-// Überprüfen Sie beim Laden der Seite, ob der Dunkelmodus im Local Storage gespeichert ist
+// ÃœberprÃ¼fen Sie beim Laden der Seite, ob der Dunkelmodus im Local Storage gespeichert ist
 if (localStorage.getItem('darkMode') === null) {
     // Setzen Sie den Dunkelmodus als Standard, wenn kein Wert im Local Storage vorhanden ist
     localStorage.setItem('darkMode', 'true');

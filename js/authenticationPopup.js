@@ -1,3 +1,4 @@
 function closePopup() {
-    document.getElementById('popup').style.display = 'none';
+    $("#popup").css("display", "none");
+    //document.getElementById('popup').style.display = 'none';
 }
