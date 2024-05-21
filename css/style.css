@@ -339,17 +339,23 @@ input[type="file"] {
     bottom: 0;
     background-color: #007bff;
     transition: .4s;
+    clip-path: inset(0 round 10px);
 }
 
     .slider:before {
         position: absolute;
-        content: "";
+        content:"🌞";
         height: 15px;
         width: 15px;
         left: 4px;
-        bottom: 4px;
+        bottom: 5px;
         background-color: white;
         transition: .4s;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        justify-content: center;
     }
 
 input:checked + .slider {
@@ -358,6 +364,7 @@ input:checked + .slider {
 
     input:checked + .slider:before {
         transform: translateX(26px);
+        content:"🌚";
     }
 
 
