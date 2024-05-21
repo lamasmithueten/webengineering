@@ -20,12 +20,13 @@
 	$errorMessage = "";
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
 	header('location:mainpage');
-	} else if(isset($_SESSION['success'])) {
-		$errorMessage = $_SESSION['success'];
-		$popUpStyle = "display: flex;";
-		unset($_SESSION['success']);
 	} else {
-	if(isset($_POST['username'])){
+	if(isset($_SESSION['success'])) {
+			$errorMessage = $_SESSION['success'];
+			$popUpStyle = "display: flex;";
+			unset($_SESSION['success']);
+	}
+	 else if(isset($_POST['username'])){
 		authenticate();
 		if(isset($_POST['errorMessage'])){
 			$errorMessage = $_POST['errorMessage'];
