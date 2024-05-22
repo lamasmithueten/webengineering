@@ -22,6 +22,7 @@ Optional:
 
 ## Contributors
 | Name | Matrikel number | Github account |
+|------|-----------------|----------------|
 | Moritz Werr | --- | lamasmithueten |
 | Phil Richter | matrikel no | 2eez4you |
 | Lukas Trapp | 1079406 | Biellbo |
