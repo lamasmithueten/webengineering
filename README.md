@@ -15,7 +15,7 @@ Ein Forum, in welchem Nutzer Nachrichten, Bilder & Memes miteinander teilen kön
 - CSS
 - JavaScript
 - jQuery
-- Apache als Webserver
+- Apache als Webserver (wichtig für die .htaccess-Datei)
 - Mariadb als Datenbank
 
 Optional:
