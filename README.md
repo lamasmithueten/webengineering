@@ -15,6 +15,8 @@ Ein Forum, in welchem Nutzer Nachrichten, Bilder & Memes miteinander teilen kön
 - CSS
 - JavaScript
 - jQuery
+- Apache als Webserver
+- Mariadb als Datenbank
 
 Optional:
 - ...
@@ -23,6 +25,6 @@ Optional:
 ## Contributors
 | Name | Matrikel number | Github account |
 |------|-----------------|----------------|
-| Moritz Werr | --- | lamasmithueten |
+| Moritz Werr | 5401527 | lamasmithueten |
 | Phil Richter | matrikel no | 2eez4you |
 | Lukas Trapp | 1079406 | Biellbo |
