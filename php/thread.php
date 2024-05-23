@@ -13,6 +13,7 @@
   <meta charset="utf-8">
   <title><?php echo htmlspecialchars($threadTitle, ENT_QUOTES, 'UTF-8'); ?></title>
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="icon" href="../icon/icon.png">
 </head>
 <body>
 <?php	
