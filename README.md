@@ -26,5 +26,5 @@ Optional:
 | Name | Matrikel number | Github account |
 |------|-----------------|----------------|
 | Moritz Werr | 5401527 | lamasmithueten |
-| Phil Richter | matrikel no | 2eez4you |
+| Phil Richter | 4164342 | 2eez4you |
 | Lukas Trapp | 1079406 | Biellbo |
