@@ -3,18 +3,21 @@
 	include("drawsite.php");
 
 	$thread_id = $_GET['variable'];
-	
+	$con = openConnection();
+	$rows = fetchThread($con, $thread_id);
+	$threadTitle = isset($rows[0]['title']) ? $rows[0]['title'] : 'Default Title';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
-		<link rel="stylesheet" type="text/css" href="../css/style.css">
+  <title><?php echo htmlspecialchars($threadTitle, ENT_QUOTES, 'UTF-8'); ?></title>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 <?php	
 drawThreadspage($thread_id);
 ?>
+<script src="../js/switchTheme.js"></script>
 </body>
 </html>

@@ -64,6 +64,8 @@ function drawThreadsPage($thread_id)
 {
 	$con = openConnection();
 	$rows = fetchThread($con, $thread_id);
+	$threadTitle = isset($rows[0]['title']) ? $rows[0]['title'] : 'Default Title';
+
 	echo '<div class="banner">';
 	echo '<a href="index.html" class="index-link">Threads</a>';
 	drawLogoutButton();
@@ -75,8 +77,6 @@ function drawThreadsPage($thread_id)
 	$rows = fetchAllComments($con, $thread_id);
 	closeConnection($con);
 	drawComments($rows, $thread_id);
-
-	echo '<script src="../js/switchTheme.js"></script>';
 }
 
 function drawThread($rows, $thread_id)
