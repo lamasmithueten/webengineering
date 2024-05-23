@@ -96,7 +96,7 @@ function drawThread($rows, $thread_id)
 		echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
 		echo '</div>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
-		    echo '<form class="delete-button" action="delete_thread.php" method="post">';
+		    echo '<form class="delete-button" action="../php/delete_thread.php" method="post">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
 		    echo '<button type="submit">Delete</button>';
 		    echo '</form>';
