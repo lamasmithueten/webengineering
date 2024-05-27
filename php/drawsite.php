@@ -133,6 +133,10 @@ function drawComments($rows, $thread_id, $con)
 			echo 'checked';
 		}
 		echo  '>';
+		echo '<span class="like-count">';
+		$like_count = getLikeCountComment($con, $arrayEntry['id']);
+		echo "$like_count";
+		echo '</span> likes';
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
 		    echo '<form class="delete-button" action="../php/delete_comment.php" method="post">';

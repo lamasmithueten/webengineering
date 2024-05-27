@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	else if ($action === 'unlike') {
 		deleteLikeComment($con, $id_user, $id_comment);
 	}
+	$like_count = getLikeCount($con, $id_comment);
+	echo json_encode(['like_count' => $like_count]);	
 
 }
 
