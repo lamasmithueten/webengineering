@@ -119,13 +119,14 @@ function drawSubmitComments($thread_id)
 
 function drawComments($rows, $thread_id)
 {
-	echo '<div class="comments">';
+	echo '<div class="comments" data-user-id="' . $_SESSION['id'] . '">';
 	echo '<p>Comments</p>';
 	foreach ($rows as $fieldname => $arrayEntry) {
-		echo '<div class="comment">';
+		echo '<div class="comment" data-comment-id="' . $arrayEntry['id'] . '">';
 		echo '<div class="comment-text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
 		echo '<div class="comment-info">';
 		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
+		echo '<input type="checkbox" class="like-checkbox">';
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
 		    echo '<form class="delete-button" action="../php/delete_comment.php" method="post">';

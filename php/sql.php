@@ -188,5 +188,32 @@ function deletePic($con, $thread_id){
 	}
 }
 
+function createLikeComment($con, $id_user, $id_comment){
+        $sql = "INSERT INTO comment_likes (id_user, id_comment) VALUES (?, ?)";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("ii", $id_user, $id_comment);
+        $stmt->execute();
+	$stmt->close();
+}
+
+function deleteLikeComment($con, $id_user, $id_comment){
+        $sql = "DELETE FROM comment_likes WHERE id_user = ? AND id_comment = ?";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("ii", $id_user, $id_comment);
+        $stmt->execute();
+        $stmt->close();
+}
+
+function getLikeCountComment($con, $id_comment){
+	$sql = "SELECT COUNT(*) as like_count FROM comment_likes WHERE comment_id = ?";
+	$stmt = $con->prepare($sql);
+	$stmt->bind_param("i", $id_comment);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$row = $result->fetch_assoc();
+	$like_count = $row['like_count'];
+	$stmt->close();
+	return $like_count;
+}
 
 ?>
