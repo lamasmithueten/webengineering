@@ -75,8 +75,8 @@ function drawThreadsPage($thread_id)
 	drawThread($rows, $thread_id);
 	drawSubmitComments($thread_id);
 	$rows = fetchAllComments($con, $thread_id);
+	drawComments($rows, $thread_id, $con);
 	closeConnection($con);
-	drawComments($rows, $thread_id);
 }
 
 function drawThread($rows, $thread_id)
@@ -117,7 +117,7 @@ function drawSubmitComments($thread_id)
 	echo '</div>';
 }
 
-function drawComments($rows, $thread_id)
+function drawComments($rows, $thread_id, $con)
 {
 	echo '<div class="comments" data-user-id="' . $_SESSION['id'] . '">';
 	echo '<p>Comments</p>';
@@ -126,7 +126,13 @@ function drawComments($rows, $thread_id)
 		echo '<div class="comment-text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
 		echo '<div class="comment-info">';
 		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
-		echo '<input type="checkbox" class="like-checkbox">';
+		//hier if-Abfrage für Setzen der Checkbox
+		echo '<input type="checkbox" class="like-checkbox" ';
+		if(isLiked($con, $arrayEntry['id'], $_SESSION['id'])==true )
+		{
+			echo 'checked';
+		}
+		echo  '>';
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
 		    echo '<form class="delete-button" action="../php/delete_comment.php" method="post">';
