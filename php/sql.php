@@ -151,7 +151,15 @@ function submitThreadWithoutPicture($con, $text, $id, $title)
 }
 
 function deleteComment($con, $comment_to_delete){
+	deleteAllLikesComment($con, $comment_to_delete);
 	$sqlquery = "DELETE FROM comments WHERE id=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $comment_to_delete);
+	$stmt->execute();
+}
+
+function deleteAllLikesComment($con, $comment_to_delete){
+	$sqlquery = "DELETE FROM comment_likes WHERE id_comment=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("i", $comment_to_delete);
 	$stmt->execute();
@@ -159,7 +167,19 @@ function deleteComment($con, $comment_to_delete){
 
 
 
+
 function deleteAllComments($con, $comments_to_delete){
+
+	$sqlquery = "SELECT id FROM comments WHERE id_thread=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $comments_to_delete);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$rows = $result->fetch_all(MYSQLI_ASSOC);
+	foreach ($rows as $fieldname => $arrayEntry) {
+		deleteAllLikesComment($con, $arrayEntry['id']);
+	}
+
 	$sqlquery = "DELETE FROM comments WHERE id_thread=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("i", $comments_to_delete);
