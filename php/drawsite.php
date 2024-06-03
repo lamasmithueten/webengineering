@@ -127,16 +127,18 @@ function drawComments($rows, $thread_id, $con)
 		echo '<div class="comment-info">';
 		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
 		//hier if-Abfrage für Setzen der Checkbox
-		echo '<input type="checkbox" class="like-checkbox" ';
-		if(isLiked($con, $arrayEntry['id'], $_SESSION['id'])==true )
-		{
-			echo 'checked';
-		}
-		echo  '>';
+		echo '<div class="like-container">';
+		echo '<input type="checkbox" class="like-checkbox"'; 
+			if(isLiked($con, $arrayEntry['id'], $_SESSION['id'])==true ) {
+				echo 'checked';
+			}
+			echo '>';
 		echo '<span class="like-count">';
-		$like_count = getLikeCountComment($con, $arrayEntry['id']);
-		echo "$like_count";
-		echo '</span> likes';
+            $like_count = getLikeCountComment($con, $arrayEntry['id']);
+            echo "$like_count";
+			echo '</span>';
+			echo '</div>';
+
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
 		    echo '<form class="delete-button" action="../php/delete_comment.php" method="post">';

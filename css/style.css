@@ -199,7 +199,7 @@ body {
     margin-top: 20px;
 }
 
-.username,
+.   ,
 .comment-username {
     font-weight: bold;
 }
@@ -371,3 +371,5 @@ input:checked + .slider {
     margin-right: 90px;
     margin-top: -10px;
 }
+
+/*Style für den Like-button*/
