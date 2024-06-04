@@ -8,7 +8,7 @@ include("sql.php");
 function checkValidEmail($con, $email ){
 	if( !filter_var ($email, FILTER_VALIDATE_EMAIL ) ){
 		//redirectRegistration("Emailadresse $email ist keine gültige Emailadresse.\n");
-		addPostErrormessage("Emailadresse $email ist keine gültige Emailadresse.");
+		addPostErrormessage("$email is not a valid e-mail adress!");
 		return false;
 	}
 	return true;
@@ -27,7 +27,7 @@ if(!checkValidEmail($con, $email))
 {
 	//Schließen der Verbindung
 	closeConnection($con);
-	addPostErrormessage("$email ist keine gültige Emailadresse.");
+	addPostErrormessage("$email is not a valid e-mail adress!");
 	return false;
 }
 //Gucken, ob Nutzername schon in Verwendung ist
@@ -35,7 +35,7 @@ if(checkUsernameTaken($con, $username))
 {
 	//Schließen der Verbindung
 	closeConnection($con);
-	addPostErrormessage("Username $username ist schon in Verwendung.");
+	addPostErrormessage("$username is already taken!");
 	return false;
 }
 
@@ -44,7 +44,7 @@ If(checkEmailTaken($con, $email))
 {
 	//Schließen der Verbindung
 	closeConnection($con);
-	addPostErrormessage("Emailadresse $email ist schon in Verwendung.");
+	addPostErrormessage("$email is arleady taken!");
 	return false;
 }
 
@@ -52,7 +52,7 @@ If(checkEmailTaken($con, $email))
 if(createUser($con, $username, $password, $email)){
 	//Schließen der Verbindung
 	closeConnection($con);
-	redirectSuccessfulRegistration("Dein Account $username wurde erfolgreich erstellt.");
+	redirectSuccessfulRegistration("The account for $username was created!");
 }
 }
 

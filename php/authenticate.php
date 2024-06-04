@@ -38,10 +38,10 @@ function createSession()
 				closeConnection($con);
 				redirect();
 			} else {
-				addPostErrormessage("Falscher Username und/oder falsches Passwort!");
+				addPostErrormessage("Wrong username or wrong password!");
 			}
 		} else {
-			addPostErrormessage("Falscher Username und/oder falsches Passwort!");
+			addPostErrormessage("Wrong username or wrong password!");
 		}
 		$stmt->close();
 	}
