@@ -24,9 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //getLikeCountComment($con, $id_comment)
 
 
-
-
-
 closeConnection($con);
 
 ?>

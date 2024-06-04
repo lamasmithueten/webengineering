@@ -37,6 +37,10 @@ body.dark {
         background-color: #ff8400;
     }
 
+    body.dark .like-checkbox:checked + .like-label .thumb-up {
+        fill: #ff8400;
+    }
+
     body.dark .authenticate input[type="submit"]:hover,
     body.dark .container input[type="submit"]:hover,
     body.dark .threads-link:hover,
@@ -46,6 +50,10 @@ body.dark {
     body.dark .comment-form input[type="submit"]:hover,
     body.dark .banner a:hover {
         background-color: #b35900;
+    }
+
+    body.dark .like-checkbox:checked + .like-label:hover .thumb-up {
+        fill: #cc6a00;
     }
 
         
@@ -373,3 +381,35 @@ input:checked + .slider {
 }
 
 /*Style für den Like-button*/
+.like-container {
+    display: flex;
+    align-items: center;
+}
+
+.like-checkbox {
+    display: none;
+}
+
+/* Standardfarbe des SVG */
+.thumb-up {
+    fill: #808080;
+    transition: fill 0.3s;
+    cursor: pointer;
+}
+
+.like-label:hover .thumb-up {
+    fill: #666666;
+}
+
+/* Farbe des SVG, wenn die Checkbox aktiviert ist */
+.like-checkbox:checked + .like-label .thumb-up {
+    fill: #007bff; 
+}
+
+.like-checkbox:checked + .like-label:hover .thumb-up {
+    fill: #0056b3;
+}
+
+.like-count {
+    margin-left: 8px;
+}
