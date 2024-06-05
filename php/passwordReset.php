@@ -1,11 +1,13 @@
+<?php
 include("sql.php");
 
 function createResetToken($email) {
     $con = openConnection();
 
-    $id = getUserIdWithEmail($email);
+    $id = getUserIdWithEmail($email, $con);
 
     if(is_null($id)){
+        closeConnection($con);
         return;
     }
 
@@ -17,6 +19,7 @@ function createResetToken($email) {
         }
     }
     createResetTokenEntry($token,$id,$email,$con);
+    closeConnection($con);
 }
 
 function getUserIdWithEmail($email, $con) {
@@ -24,11 +27,17 @@ function getUserIdWithEmail($email, $con) {
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("s", $email);
 	$stmt->execute();
-	return $stmt->get_result();
+	$result = $stmt->get_result();
+    if($result->num_rows == 0) {
+        return null;
+    }
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $first_row = $rows[0];
+    return $first_row["id"];
 }
 
 function generateToken($length, $maxValue) {
-    str_pad(mt_rand(0, $maxValue), $length, '0', STR_PAD_LEFT);
+    return str_pad(mt_rand(0, $maxValue), $length, '0', STR_PAD_LEFT);
 }
 
 function checkIfTokenExists($reset_token,$con) {
@@ -36,7 +45,7 @@ function checkIfTokenExists($reset_token,$con) {
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("s", $reset_token);
 	$stmt->execute();
-	$resul = $stmt->get_result();
+	$result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
 		return true;
@@ -45,15 +54,17 @@ function checkIfTokenExists($reset_token,$con) {
 }
 
 function createResetTokenEntry($token, $id,$email, $con) {
+    deleteCodeOfUser($id,$con);
+
     $expires = new DateTime();
     $expires->modify('+20 minutes');
-    $expires->format('Y-m-d H:i:s');
+    $expiresFormated = $expires->format('Y-m-d H:i:s');
     $sqlquery = "INSERT INTO password_reset (id, user_id, reset_token, expires) VALUES ( NULL, ?, ?, ?)";
 	$stmt = $con->prepare($sqlquery);
-	$stmt->bind_param("sss", $id, $token, $expires);
+	$stmt->bind_param("sss", $id, $token, $expiresFormated);
 
     if ($stmt->execute()) {
-        //sendEmail($email, $token);
+        sendEmail($email, $token);
 		return true;
 	} else {
 		echo "ERROR: "
@@ -75,3 +86,12 @@ function sendEmail($email, $token) {
             \n\nNote: For security reasons, this code will expire in 20 Minutes. Please ensure you complete the reset process within this timeframe.";
 		mail($email, $subject, $text);
 }
+
+function deleteCodeOfUser($id_user, $con) {
+    $sqlquery = "DELETE FROM password_reset WHERE user_id=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $id_user);
+	$stmt->execute();
+}
+
+?>
