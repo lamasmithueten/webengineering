@@ -1,6 +1,40 @@
 <?php
 include("sql.php");
 
+function resetPassword($code, $password) {
+    $con = openConnection();
+    $entry = getTokenEntry($code, $con);
+    if(is_null($entry)) {
+        return;
+    }
+    if(isExpired($entry['expires'])) {
+        return;
+    }
+    
+}
+
+function isExpired($dateTime) {
+    $now = new DateTime();
+    if($dateTime->getTimestamp() >= $now->getTimestamp()) {
+        return false;
+    }
+    return true;
+}
+
+function getTokenEntry($code, $con) {
+    $sqlquery = "SELECT * FROM password_reset WHERE reset_token = ?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("s", $code);
+	$stmt->execute();
+	$result = $stmt->get_result();
+    if($result->num_rows == 0) {
+        return null;
+    }
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
+    $first_row = $rows[0];
+    return $first_row;
+}
+
 function createResetToken($email) {
     $con = openConnection();
 
