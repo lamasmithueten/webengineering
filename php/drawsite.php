@@ -125,8 +125,10 @@ function drawComments($rows, $thread_id, $con)
 		echo '<div class="comment" data-comment-id="' . $arrayEntry['id'] . '">';
 		echo '<div class="comment-text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
 		echo '<div class="comment-info">';
-		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
+		echo '<div class="username-likes">'; // Neue div hinzufügen
 		drawLikes($con, $arrayEntry);
+		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
+		echo '</div>'; // Schließen Sie die neue div
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
 		    echo '<form class="delete-button" action="../php/delete_comment.php" method="post">';
@@ -140,6 +142,8 @@ function drawComments($rows, $thread_id, $con)
 	}
 	echo '</div>';
 }
+
+
 
 function drawLogoutButton(){
 	echo '<div class="logout-button">';
