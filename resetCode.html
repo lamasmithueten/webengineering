@@ -14,12 +14,12 @@
 <body>
 	<?php
 	$popUpStyle = "display: none;";
-	$message = "If an account belongs to this e-mail, a reset token was sent to this e-mail";
+	$message = "";
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
 	header('location:mainpage');
 	} else {
-		if(isset($_POST['email'])) {
-			createResetToken($_POST['email']);
+		if(isset($_POST['code']) && isset($_POST['password'])) {
+			$message = resetPassword($_POST['code'],$_POST['password']);
 			$popUpStyle = "display: flex;";
 		}
 	?>
