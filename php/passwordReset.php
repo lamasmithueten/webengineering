@@ -169,7 +169,7 @@ function sendResetCode($email, $token) {
 }
 
 function sendPasswordResetNotification($email) {
-    $subject = "Password Reseted";
+    $subject = "Password reset";
 		$text = "Dear User,\n\n
         We are writing to inform you that the password for your account was successfully changed.
         \n\nIf you made this change, no further action is required. You can now use your new password to access your account. 
