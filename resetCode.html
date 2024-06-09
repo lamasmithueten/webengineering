@@ -13,15 +13,22 @@
 </head>
 <body>
 	<?php
+	session_start();
 	$popUpStyle = "display: none;";
 	$message = "";
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
 	header('location:mainpage');
 	} else {
+		if(isset($_SESSION['showPopup']) && $_SESSION['showPopup']) {
+			$message = "If an account belongs to this e-mail, a reset token was sent to this e-mail";
+			$popUpStyle = "display: flex;";
+			$_SESSION['showPopup'] = false;
+		}
 		if(isset($_POST['code']) && isset($_POST['password'])) {
 			$message = resetPassword($_POST['code'],$_POST['password']);
 			$popUpStyle = "display: flex;";
 		}
+			
 	?>
     <div class="authenticate">
 		<h1>Passwort Reset</h1>
