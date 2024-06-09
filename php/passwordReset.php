@@ -156,29 +156,31 @@ function createResetTokenEntry($token, $id,$email, $con) {
 
 function sendResetCode($email, $token) {
     $subject = "Password Reset Code";
-		$text = "Dear User,\n\n
-        We have received a request to reset the password for your account. Please use the code provided below to complete the password reset process:
-            \n\n**Reset Code: {$token}**\n\nTo reset your password, follow these steps:
-            \n1. Go to the password reset page on our website.\n2. Enter your email address and the reset code provided above.
-            \n3. Follow the on-screen instructions to set a new password.\n\nIf you did not request a password reset, please ignore this email. 
-            Your account will remain secure, and no changes will be made.\n\nIf you have any questions or need further assistance, 
-            please do not hesitate to contact our support team at [Support Email] or [Support Phone Number].
-            \n\nBest regards,\n\nYour Anarchy IT-Support---
-            \n\nNote: For security reasons, this code will expire in 20 Minutes. Please ensure you complete the reset process within this timeframe.";
+		$text = "Dear User,\n\n".
+                "We have received a request to reset the password for your account. Please use the code provided below to complete the password reset process:\n\n".
+                "Reset Code: {$token}\n\n".
+                "If you did not request a password reset, please ignore this email. Your account will remain secure, and no changes will be made.\n\n".
+                "If you have any questions or need further assistance, please do not hesitate to contact our support team.\n\n".
+                "Best regards,\n\n".
+                "Your Anarchy IT-Support\n\n".
+                "Note: For security reasons, this code will expire in 20 Minutes. Please ensure you complete the reset process within this timeframe.";
+
 		mail($email, $subject, $text);
 }
 
 function sendPasswordResetNotification($email) {
     $subject = "Password reset";
-		$text = "Dear User,\n\n
-        We are writing to inform you that the password for your account was successfully changed.
-        \n\nIf you made this change, no further action is required. You can now use your new password to access your account. 
-        If you did not authorize this change, it is important that you act immediately to secure your account. 
-        Please change your password immediately and contact the Anarchy IT-Support to report the unauthorized change.
-        \n\nIf you have any questions or need assistance, 
-        please do not hesitate to contact our support team.\n\nThank you for your attention to this matter.\n\nBest regards,
-        \n\nYour Anarchy IT-Support---
-        **Note:** This is an automated message. Please do not reply to this email.\n\n---";
+		$text = "Dear User,\n\n".
+                "We are writing to inform you that the password for your account was successfully changed.\n\n".
+                "If you made this change, no further action is required. You can now use your new password to access your account.\n".
+                "If you did not authorize this change, it is important that you act immediately to secure your account.\n".
+                "Please change your password immediately and contact the Anarchy IT-Support to report the unauthorized change.\n\n".
+                "If you have any questions or need assistance, please do not hesitate to contact our support team.\n\n".
+                "Thank you for your attention to this matter.\n\n".
+                "Best regards,\n\n".
+                "Your Anarchy IT-Support\n\n".
+                "Note: This is an automated message. Please do not reply to this email.";
+
 		mail($email, $subject, $text);
 }
 
