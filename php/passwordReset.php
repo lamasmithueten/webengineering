@@ -55,7 +55,9 @@ function resetPasswordHelper($code, $password, $con) {
 
 function isExpired($dateTime) {
     $now = new DateTime();
-    if(date_create_from_format('d/m/Y:H:i:s',$dateTime) <= $now) {
+    $date = new DateTime($dateTime);
+
+    if($date >= $now) {  
         return false;
     }
     return true;
