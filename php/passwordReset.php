@@ -11,7 +11,6 @@ function createResetTokenHelper($email, $con) {
     $id = getUserIdWithEmail($email, $con);
 
     if(is_null($id)){
-        closeConnection($con);
         return;
     }
 

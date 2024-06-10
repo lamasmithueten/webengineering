@@ -21,6 +21,7 @@ body.dark {
     body.dark .comment,
     body.dark textarea,
     body.dark input[type="text"],
+    body.dark input[type="email"],  
     body.dark input[type="password"] {
         background-color: #2B2B2B;
         color: #F5F5F5;
@@ -79,6 +80,7 @@ body {
 }
 
     .authenticate input[type="text"],
+    .authenticate input[type=email],
     .authenticate input[type="password"],
     .authenticate input[type="submit"],
     .container input[type="submit"],
