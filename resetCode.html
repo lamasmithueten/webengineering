@@ -25,7 +25,7 @@
 			$_SESSION['showPopup'] = false;
 		}
 		if(isset($_POST['code']) && isset($_POST['password'])) {
-			$message = resetPassword($_POST['code'],$_POST['password']);
+			$message = resetPassword($_POST['code'],$_POST['password'],$_POST['password2']);
 			$popUpStyle = "display: flex;";
 		}
 			
@@ -47,6 +47,10 @@
 				<i class="fas fa-user"></i>
 			</label>
 			<input type="password" name="password" placeholder="New password" id="password" required>
+			<label for="password2">
+				<i class="fas fa-user"></i>
+			</label>
+			<input type="password" name="password2" placeholder="Repeat new password" id="password2" required>
 			<input type="submit" value="Reset">
 		</form>
 		<div class="register-link">

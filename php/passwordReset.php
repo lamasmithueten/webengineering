@@ -26,10 +26,14 @@ function createResetTokenHelper($email, $con) {
     }
 }
 
-function resetPassword($code, $password) {
-    $con = openConnection();
-    $message = resetPasswordHelper($code, $password, $con);
-    closeConnection($con);
+function resetPassword($code, $password, $password2) {
+    if($password != $password2){
+        $message = "Passwords must be the same!";
+    } else {
+        $con = openConnection();
+        $message = resetPasswordHelper($code, $password, $con);
+        closeConnection($con);
+    }
     return $message;
 }
 

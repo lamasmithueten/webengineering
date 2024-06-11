@@ -14,7 +14,15 @@ function checkValidEmail($con, $email ){
 	return true;
 }
 
+function comparePassword() {
+	return $_POST['password'] == $_POST['password2'];
+}
+
 function registerUser() {
+	if(!comparePassword()){
+		addPostErrormessage("Passwords must be the same!");
+		return false;
+	}
 //Aufbau der Verbindung zum Datenbankserver
 $con = openConnection();
 //Entfernen von speziellen Characters in Email und Nutzernamen, Hashen des Passworts
