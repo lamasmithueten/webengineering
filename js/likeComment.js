@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    // Retrieve user ID from the embedded data attribute
-    var userId = $('#user-data').data('user-id');
 
     $('.like-checkbox').on('change', function () {
         var checkbox = $(this);
@@ -12,7 +10,6 @@ $(document).ready(function () {
             url: '../php/like_comment.php',
             type: 'POST',
             data: {
-                user_id: userId,
                 comment_id: commentId,
                 action: action
             },
