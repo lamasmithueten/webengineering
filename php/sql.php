@@ -279,7 +279,9 @@ function fetchAccountsInfo($con)
 }
 
 function deleteAccount($con, $id){
-	$sqlquery = "SELECT id FROM threads WHERE id_user=?";
+	deleteAllLikesUser($con, $id);
+	deleteAllCommentsUser($con, $id);
+	$sqlquery = "SELECT id FROM threads WHERE id_account=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("i", $id);
 	$stmt->execute();
@@ -289,6 +291,20 @@ function deleteAccount($con, $id){
 		deleteThread($con, $arrayEntry['id']);
 	}
 	$sqlquery = "DELETE FROM accounts WHERE id=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+}
+
+function deleteAllLikesUser($con, $id){
+	$sqlquery = "DELETE FROM comment_likes WHERE id_user=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+}
+
+function deleteAllCommentsUser($con, $id){
+	$sqlquery = "DELETE FROM comments WHERE id_account=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("i", $id);
 	$stmt->execute();

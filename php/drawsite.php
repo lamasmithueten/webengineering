@@ -236,10 +236,13 @@ function drawAdminpage(){
 	echo '<tr><th>Username</th><th>Emailadresse</th></tr>';
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<tr><td>' . $arrayEntry['username'] . '</td><td>' . $arrayEntry['email'] . '</td>';
-		echo '<td><form class="delete-user-button"action="php/delete_user.php" method="post">';
-		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
-		echo '<button type="submit">Delete User</button>';
-		echo '</form></td></tr>';
+		if ($arrayEntry['id'] != 1){
+			echo '<td><form class="delete-user-button"action="php/delete_user.php" method="post">';
+			echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
+			echo '<button type="submit">Delete User</button>';
+			echo '</form>';
+		}
+		echo '</td></tr>';
 	}
 	echo '</table>';
 }
