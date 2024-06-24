@@ -233,9 +233,19 @@ function drawAdminpage(){
 	$rows = fetchAccountsInfo($con);
 	closeConnection($con);
 	echo '<table>';
-	echo '<tr><th>Username</th><th>Emailadresse</th></tr>';
+	echo '<tr><th>Username</th><th>Current Emailaddresse</th><th>Update Email</th><th>Update Password</th><th>delete User</th></tr>';
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<tr><td>' . $arrayEntry['username'] . '</td><td>' . $arrayEntry['email'] . '</td>';
+		echo '<td><form class="update-button"action="php/update_email.php" method="post">';
+		echo '<input type="text" placeholder="email" name="email" maxlength="255" required>';
+		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
+		echo '<button type="submit">Update</button>';
+		echo '</form>';
+		echo '<td><form class="update-button"action="php/update_password.php" method="post">';
+		echo '<input type="password" placeholder="password" name="password" maxlength="255" required>';
+		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
+		echo '<button type="submit">Update</button>';
+		echo '</form>';
 		if ($arrayEntry['id'] != 1){
 			echo '<td><form class="delete-user-button"action="php/delete_user.php" method="post">';
 			echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';

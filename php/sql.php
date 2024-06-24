@@ -310,4 +310,19 @@ function deleteAllCommentsUser($con, $id){
 	$stmt->execute();
 }
 
+function updateEmail($con, $id, $email){
+	$sqlquery = "UPDATE accounts SET email = ?  WHERE id=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("si", $email, $id);
+	$stmt->execute();
+}
+
+function updatePassword($con, $id, $password){
+	$sqlquery = "UPDATE accounts SET password = ?  WHERE id=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("si", $password, $id);
+	$stmt->execute();
+}
+
+
 ?>
