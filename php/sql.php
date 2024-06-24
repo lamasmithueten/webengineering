@@ -256,4 +256,16 @@ function isLiked($con, $id_comment, $id_user){
 
 }
 
+function fetchThreadsSearchpage($con, $search)
+{
+	$search_phrase = "%$search%";
+	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id, threads.id_account FROM accounts JOIN threads ON accounts.id = threads.id_account where text like ? order by timestamp DESC";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("s", $search_phrase);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$rows = $result->fetch_all(MYSQLI_ASSOC);
+	return $rows;
+}
+
 ?>
