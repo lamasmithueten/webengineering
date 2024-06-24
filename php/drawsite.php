@@ -146,7 +146,7 @@ function drawLikes($con, $arrayEntry) {
 
 function drawSearch(){
 	echo '<div class=search-bar>';
-	echo '<form action="search.html" method="post">';
+	echo '<form action="search" method="post">';
 	echo '<input type="text" name="search" placeholder="Search" id="search" maxlength="255" required />';
 	echo '</div>';
 	echo '<div class=search-button>';
