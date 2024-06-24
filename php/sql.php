@@ -268,4 +268,30 @@ function fetchThreadsSearchpage($con, $search)
 	return $rows;
 }
 
+function fetchAccountsInfo($con)
+{
+	$sqlquery = "SELECT username, email, id FROM accounts";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$rows = $result->fetch_all(MYSQLI_ASSOC);
+	return $rows;
+}
+
+function deleteAccount($con, $id){
+	$sqlquery = "SELECT id FROM threads WHERE id_user=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$rows = $result->fetch_all(MYSQLI_ASSOC);
+	foreach ($rows as $fieldname => $arrayEntry) {
+		deleteThread($con, $arrayEntry['id']);
+	}
+	$sqlquery = "DELETE FROM accounts WHERE id=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+}
+
 ?>
