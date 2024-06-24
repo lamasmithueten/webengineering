@@ -11,10 +11,10 @@ function drawThreadsMainpage()
 	echo '<div class="submit-link">';
 	echo '	<a href="submit.html">submit a new thread</a>';
 	echo '</div>';
-	drawSearch();
 	if ($_SESSION['id'] ==1){
 		echo '<a href="admin">Admin</a>';
 	}
+	drawSearch();
 	drawLogoutButton();
 	drawThemeSlider();
 	echo '</div>';
@@ -148,15 +148,18 @@ function drawLikes($con, $arrayEntry) {
 }
 
 function drawSearch(){
-	echo '<form action="search" method="post">';
-	echo '<div class=search-bar>';
-	echo '<input type="text" name="search" placeholder="Search" id="search" maxlength="255"/>';
-	echo '</div>';
-	echo '<div class=search-button>';
-	echo '<input type="submit" value="Search" />';
-	echo '</div>';
-	echo '</form>';
+    echo '<form action="search" method="post">';
+    echo '<div class="search-container">';
+    echo '<div class="search-bar">';
+    echo '<input type="text" name="search" placeholder="Search" id="search" maxlength="255"/>';
+    echo '</div>';
+    echo '<div class="search-button">';
+    echo '<input type="submit" value="Search" />';
+    echo '</div>';
+    echo '</div>';
+    echo '</form>';
 }
+
 
 
 function drawThreads($rows){

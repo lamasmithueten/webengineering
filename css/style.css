@@ -6,6 +6,11 @@
     font-family: Arial, sans-serif;
 }
 
+button,
+input[type="submit"] {
+    font-family: Arial, sans-serif;
+}
+
 :root {
     --color-bg: #ffffff;
     --color-text: #000000;
@@ -34,6 +39,7 @@ body.dark {
     body.dark .delete-button button,
     body.dark .logout-button button,
     body.dark .comment-form input[type="submit"],
+    body.dark .search-button input[type="submit"],
     body.dark .banner a {
         background-color: #ff8400;
     }
@@ -49,6 +55,7 @@ body.dark {
     body.dark .delete-button button:hover,
     body.dark .logout-button button:hover,
     body.dark .comment-form input[type="submit"]:hover,
+    body.dark .search-button input[type="submit"]:hover,
     body.dark .banner a:hover {
         background-color: #b35900;
     }
@@ -85,6 +92,7 @@ body {
     .authenticate input[type="submit"],
     .container input[type="submit"],
     .container input[type="text"],
+    .search-bar input[type="text"],
     textarea {
         width: 100%;
         margin-bottom: 10px;
@@ -110,6 +118,7 @@ body {
         .container input[type="submit"]:hover,
         .authenticate input[type="submit"]:hover,
         .comment-form input[type="submit"]:hover,
+        .search-button input[type="submit"]:hover,
         .delete-button button:hover,
         .logout-button button:hover,
         .threads-link:hover,
@@ -159,8 +168,13 @@ body {
     padding-top: 0;
 }
 
+.logout-button {
+    margin-right: -5px;
+}
+
     .delete-button button,
-    .logout-button button {
+    .logout-button button,
+    .search-button input[type="submit"]{
         padding: 4px 8px;
         background-color: #007bff;
         color: #fff;
@@ -398,7 +412,7 @@ input:checked + .slider {
 
 
 .theme-slider {
-    margin-right: 90px;
+    margin-right: 80px;
     margin-top: -10px;
 }
 
@@ -435,4 +449,24 @@ input:checked + .slider {
 
 .like-count {
     margin-left: 8px;
+}
+
+/*Style für Sear-Bar und Button*/
+.search-container {
+    position: fixed;
+    top: 10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    display: flex; 
+    gap: 10px;
+    align-items: center; 
+}
+
+.search-button {
+   margin-top: -10px;
+}
+
+.search-button input[type="submit"],
+.search-bar input[type="text"] {
+    height: 35px;
 }
