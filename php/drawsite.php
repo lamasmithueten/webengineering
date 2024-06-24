@@ -48,7 +48,7 @@ function drawThreadsMainpage()
 			$arrayEntry["timestamp"] .
 			"</div>";
 		echo "</div>";
-		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
+		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] ==1 ) {
 			echo '<form class="delete-button" action="php/delete_thread.php" method="post">';
 			echo '<input type="hidden" name="thread_id" value="' . $arrayEntry["id"] . '">';
 			echo '<button type="submit">Delete</button>';
@@ -95,7 +95,7 @@ function drawThread($rows, $thread_id)
 		echo '<div class="username">' . $arrayEntry['username'] . '</div>';
 		echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
 		echo '</div>';
-		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
+		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $$_SESSION['id'] == 1 ) {
 		    echo '<form class="delete-button" action="../php/delete_thread.php" method="post">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
 		    echo '<button type="submit">Delete</button>';
@@ -130,7 +130,7 @@ function drawComments($rows, $thread_id, $con)
 		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
 		echo '</div>'; // Schlieﬂen Sie die neue div
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
-		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account']) {
+		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] == 1) {
 		    echo '<form class="delete-button" action="../php/delete_comment.php" method="post">';
 		    echo '<input type="hidden" name="comment_id" value="' . $arrayEntry['id'] . '">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
