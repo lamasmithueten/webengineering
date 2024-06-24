@@ -12,6 +12,9 @@ function drawThreadsMainpage()
 	echo '	<a href="submit.html">submit a new thread</a>';
 	echo '</div>';
 	drawSearch();
+	if ($_SESSION['id'] ==1){
+		echo '<a href="admin">Admin</a>';
+	}
 	drawLogoutButton();
 	drawThemeSlider();
 	echo '</div>';
@@ -145,60 +148,62 @@ function drawLikes($con, $arrayEntry) {
 }
 
 function drawSearch(){
-	echo '<div class=search-bar>';
 	echo '<form action="search" method="post">';
-	echo '<input type="text" name="search" placeholder="Search" id="search" maxlength="255" required />';
+	echo '<div class=search-bar>';
+	echo '<input type="text" name="search" placeholder="Search" id="search" maxlength="255"/>';
 	echo '</div>';
 	echo '<div class=search-button>';
 	echo '<input type="submit" value="Search" />';
 	echo '</div>';
+	echo '</form>';
 }
 
-function drawThreads($rows){
-	foreach ($rows as $fieldname => $arrayEntry) {
-		echo '<div class="thread">';
-		echo '<div class="title"><a href="thread/' .
-			$arrayEntry["id"] .
-			'">';
-		echo str_replace(
-			['\r\n', '\n\r', '\n', '\r'],
-			"<br>",
-			$arrayEntry["title"]
-		);
-		echo "</a></div>";
 
-		echo '<div class="post">';
-		if (isset($arrayEntry["picture_path"])) {
-			$image = $arrayEntry["picture_path"];
-			echo '<div class="image"><img src="../pictures/' .
-				$image .
-				'"></div>';
-		}
-		echo '<div class="text">' .
-			str_replace(
+function drawThreads($rows){
+		foreach ($rows as $fieldname => $arrayEntry) {
+			echo '<div class="thread">';
+			echo '<div class="title"><a href="thread/' .
+				$arrayEntry["id"] .
+				'">';
+			echo str_replace(
 				['\r\n', '\n\r', '\n', '\r'],
 				"<br>",
-				$arrayEntry["text"]
-			) .
-			"</div>";
-		echo "</div>";
+				$arrayEntry["title"]
+			);
+			echo "</a></div>";
 
-		echo '<div class="user_info">';
-		echo '<div class="username">' . $arrayEntry["username"] . "</div>";
-		echo '<div class="timestamp">' .
-			$arrayEntry["timestamp"] .
-			"</div>";
-		echo "</div>";
-		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] ==1 ) {
-			echo '<form class="delete-button" action="php/delete_thread.php" method="post">';
-			echo '<input type="hidden" name="thread_id" value="' . $arrayEntry["id"] . '">';
-			echo '<button type="submit">Delete</button>';
-			echo '</form>';
+			echo '<div class="post">';
+			if (isset($arrayEntry["picture_path"])) {
+				$image = $arrayEntry["picture_path"];
+				echo '<div class="image"><img src="../pictures/' .
+					$image .
+					'"></div>';
+			}
+			echo '<div class="text">' .
+				str_replace(
+					['\r\n', '\n\r', '\n', '\r'],
+					"<br>",
+					$arrayEntry["text"]
+				) .
+				"</div>";
+			echo "</div>";
+
+			echo '<div class="user_info">';
+			echo '<div class="username">' . $arrayEntry["username"] . "</div>";
+			echo '<div class="timestamp">' .
+				$arrayEntry["timestamp"] .
+				"</div>";
+			echo "</div>";
+			if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] ==1 ) {
+				echo '<form class="delete-button" action="php/delete_thread.php" method="post">';
+				echo '<input type="hidden" name="thread_id" value="' . $arrayEntry["id"] . '">';
+				echo '<button type="submit">Delete</button>';
+				echo '</form>';
+			}
+
+			echo "</div>";
+			echo "<br>";
 		}
-
-		echo "</div>";
-		echo "<br>";
-	}
 
 }
 
@@ -213,6 +218,10 @@ function drawThreadsSearchpage()
 	echo '	<a href="submit.html">submit a new thread</a>';
 	echo '</div>';
 	drawSearch();
+	echo '<a href="mainpage.html">Clear results</a>';
+	if ($_SESSION['id'] ==1){
+		echo '<a href="admin">Admin</a>';
+	}
 	drawLogoutButton();
 	drawThemeSlider();
 	echo '</div>';
