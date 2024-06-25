@@ -247,7 +247,6 @@ function drawThreadsSearchpage()
 	$con = openConnection();
 	$search = mysqli_real_escape_string($con, $_POST['search']);
 	$rows = fetchThreadsSearchpage($con, $search);
-	closeConnection($con);
 	echo '<div class="banner">';
 	echo '<div class="submit-link">';
 	echo '	<a href="submit.html">submit a new thread</a>';
@@ -260,7 +259,8 @@ function drawThreadsSearchpage()
 	drawLogoutButton();
 	drawThemeSlider();
 	echo '</div>';
-	drawThreads($rows);
+	drawThreads($rows, $con);
+	closeConnection($con);
 }
 
 function drawAdminpage(){
