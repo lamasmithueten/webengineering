@@ -22,5 +22,6 @@ drawThreadspage($thread_id);
 ?>
 <script src="../js/switchTheme.js"></script>
 <script src="../js/likeComment.js"></script>
+<script src="../js/likeThread.js"></script>
 </body>
 </html>

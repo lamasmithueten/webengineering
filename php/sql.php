@@ -189,6 +189,11 @@ function deleteAllComments($con, $comments_to_delete){
 function deleteThread($con, $thread_to_delete){
 	deleteAllComments($con, $thread_to_delete);
 	deletePic($con, $thread_to_delete);
+	$sqlquery = "DELETE FROM thread_likes WHERE id_thread=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $thread_to_delete);
+	$stmt->execute();
+	
 	$sqlquery = "DELETE FROM threads WHERE id=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("i", $thread_to_delete);
@@ -350,6 +355,10 @@ function deleteAccount($con, $id){
 
 function deleteAllLikesUser($con, $id){
 	$sqlquery = "DELETE FROM comment_likes WHERE id_user=?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $id);
+	$stmt->execute();
+	$sqlquery = "DELETE FROM thread_likes WHERE id_user=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("i", $id);
 	$stmt->execute();
