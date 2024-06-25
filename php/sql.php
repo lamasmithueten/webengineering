@@ -256,6 +256,58 @@ function isLiked($con, $id_comment, $id_user){
 
 }
 
+//-------------------------------------WIPanfang
+
+function createLikeThread($con, $id_user, $id_thread){
+        $sqlquery = "INSERT INTO thread_likes (id_user, id_thread) VALUES (?, ?)";
+        $stmt = $con->prepare($sqlquery);
+        $stmt->bind_param("ii", $id_user, $id_thread);
+        $stmt->execute();
+	$stmt->close();
+}
+
+function deleteLikeThread($con, $id_user, $id_thread){
+        $sqlquery = "DELETE FROM thread_likes WHERE id_user = ? AND id_thread = ?";
+        $stmt = $con->prepare($sqlquery);
+        $stmt->bind_param("ii", $id_user, $id_thread);
+        $stmt->execute();
+        $stmt->close();
+}
+
+function getLikeCountThread($con, $id_thread){
+	$sqlquery = "SELECT COUNT(*) as like_count FROM thread_likes WHERE id_thread = ?";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("i", $id_thread);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$row = $result->fetch_assoc();
+	$like_count = $row['like_count'];
+	$stmt->close();
+	return $like_count;
+}
+
+function isLikedThread($con, $id_thread, $id_user){
+	$sqlquery = "SELECT COUNT(*) AS like_count FROM thread_likes WHERE id_thread = ? AND id_user = ? ";
+	$stmt = $con->prepare($sqlquery);
+	$stmt->bind_param("ii", $id_thread, $id_user);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$row = $result->fetch_assoc();
+	$like_count = $row['like_count'];
+	$stmt->close();
+	if ($like_count >0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+//---------------------------------------WIPende
+
 function fetchThreadsSearchpage($con, $search)
 {
 	$search_phrase = "%$search%";
@@ -317,7 +369,7 @@ function updateEmail($con, $id, $email){
 	$stmt->execute();
 }
 
-function updatePassword($con, $id, $password){
+function update_password($con, $id, $password){
 	$sqlquery = "UPDATE accounts SET password = ?  WHERE id=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("si", $password, $id);
