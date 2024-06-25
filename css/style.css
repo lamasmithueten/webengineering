@@ -26,7 +26,7 @@ body.dark {
     body.dark .comment,
     body.dark textarea,
     body.dark input[type="text"],
-    body.dark input[type="email"],  
+    body.dark input[type="email"], 
     body.dark input[type="password"] {
         background-color: #2B2B2B;
         color: #F5F5F5;
@@ -35,9 +35,11 @@ body.dark {
     body.dark .authenticate input[type="submit"],
     body.dark .container input[type="submit"],
     body.dark .threads-link,
+    body.dark th,
     body.dark .input[type="submit"],
     body.dark .delete-button button,
     body.dark .logout-button button,
+    body.dark .admin-form button[type="submit"],
     body.dark .comment-form input[type="submit"],
     body.dark .search-button input[type="submit"],
     body.dark .banner a {
@@ -54,6 +56,7 @@ body.dark {
     body.dark .input[type="submit"]:hover,
     body.dark .delete-button button:hover,
     body.dark .logout-button button:hover,
+    body.dark .admin-form button[type="submit"]:hover,
     body.dark .comment-form input[type="submit"]:hover,
     body.dark .search-button input[type="submit"]:hover,
     body.dark .banner a:hover {
@@ -62,6 +65,10 @@ body.dark {
 
     body.dark .like-checkbox:checked + .like-label:hover .thumb-up {
         fill: #cc6a00;
+    }
+
+    body.dark tr:nth-of-type(even) {
+        background-color: #424242;
     }
 
         
@@ -93,6 +100,8 @@ body {
     .container input[type="submit"],
     .container input[type="text"],
     .search-bar input[type="text"],
+    .admin-form input[type="text"],
+    .admin-form input[type="password"],
     textarea {
         width: 100%;
         margin-bottom: 10px;
@@ -119,6 +128,7 @@ body {
         .authenticate input[type="submit"]:hover,
         .comment-form input[type="submit"]:hover,
         .search-button input[type="submit"]:hover,
+        .admin-form button[type="submit"]:hover,
         .delete-button button:hover,
         .logout-button button:hover,
         .threads-link:hover,
@@ -174,7 +184,8 @@ body {
 
     .delete-button button,
     .logout-button button,
-    .search-button input[type="submit"]{
+    .admin-form button[type="submit"],
+    .search-button input[type="submit"] {
         padding: 4px 8px;
         background-color: #007bff;
         color: #fff;
@@ -453,7 +464,7 @@ input:checked + .slider {
 
 /*Style für Sear-Bar und Button*/
 .search-container {
-    position: fixed;
+    position: absolute;
     top: 10px; 
     left: 50%; 
     transform: translateX(-50%); 
@@ -469,4 +480,59 @@ input:checked + .slider {
 .search-button input[type="submit"],
 .search-bar input[type="text"] {
     height: 35px;
+}
+
+/*Style für Adminlink*/
+.admin-link {
+    position : absolute;
+    left: 205px;
+}
+
+/* Admin-Seite Styles */
+.admin-table{
+    margin:20px 10px 0 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+.admin-form {
+    display: flex;
+    align-items:center;
+    gap: 10px;
+}
+
+    .admin-form button[type="submit"]{
+        height: 35px;
+    }
+
+    .admin-form input[type="text"],
+    .admin-form input[type="password"]{
+        margin-top: 10px;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #dddddd;
+    }
+
+th {
+    background-color: #007bff;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+form.update-button, form.delete-user-button {
+    margin: 0;
 }

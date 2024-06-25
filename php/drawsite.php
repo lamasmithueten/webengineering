@@ -12,7 +12,9 @@ function drawThreadsMainpage()
 	echo '	<a href="submit.html">submit a new thread</a>';
 	echo '</div>';
 	if ($_SESSION['id'] ==1){
-		echo '<a href="admin">Admin</a>';
+		echo '<div class="admin-link">';
+		echo '<a href="admin.html">Admin</a>';
+		echo '</div>';
 	}
 	drawSearch();
 	drawLogoutButton();
@@ -160,8 +162,6 @@ function drawSearch(){
     echo '</form>';
 }
 
-
-
 function drawThreads($rows){
 		foreach ($rows as $fieldname => $arrayEntry) {
 			echo '<div class="thread">';
@@ -207,7 +207,6 @@ function drawThreads($rows){
 			echo "</div>";
 			echo "<br>";
 		}
-
 }
 
 function drawThreadsSearchpage()
@@ -235,29 +234,40 @@ function drawAdminpage(){
 	$con = openConnection();
 	$rows = fetchAccountsInfo($con);
 	closeConnection($con);
+
+	echo '<div class="banner">';
+	echo '<a href="index.html" class="index-link">Threads</a>';
+	drawLogoutButton();
+	drawThemeSlider();
+	echo '</div>';
+
+	echo '<div class="admin-table">';
 	echo '<table>';
 	echo '<tr><th>Username</th><th>Current Emailaddresse</th><th>Update Email</th><th>Update Password</th><th>delete User</th></tr>';
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<tr><td>' . $arrayEntry['username'] . '</td><td>' . $arrayEntry['email'] . '</td>';
-		echo '<td><form class="update-button"action="php/update_email.php" method="post">';
+		echo '<td><form class="admin-form update-button"action="php/update_email.php" method="post">';
 		echo '<input type="text" placeholder="email" name="email" maxlength="255" required>';
 		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
 		echo '<button type="submit">Update</button>';
 		echo '</form>';
-		echo '<td><form class="update-button"action="php/update_password.php" method="post">';
+		echo '<td><form class="admin-form update-button"action="php/update_password.php" method="post">';
 		echo '<input type="password" placeholder="password" name="password" maxlength="255" required>';
 		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
 		echo '<button type="submit">Update</button>';
 		echo '</form>';
 		if ($arrayEntry['id'] != 1){
-			echo '<td><form class="delete-user-button"action="php/delete_user.php" method="post">';
+			echo '<td><form class="admin-form delete-user-button"action="php/delete_user.php" method="post">';
 			echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
 			echo '<button type="submit">Delete User</button>';
 			echo '</form>';
+		}else{
+			echo '<td class="placeholder-delete"></td>';
 		}
 		echo '</td></tr>';
 	}
 	echo '</table>';
+	echo '</div>';
 }
 
 ?>
