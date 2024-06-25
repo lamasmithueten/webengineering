@@ -44,7 +44,7 @@ function fetchThread($con, $thread_id)
 
 function fetchAllComments($con, $thread_id)
 {
-	$sqlquery = "select accounts.username, comments.text, comments.timestamp, comments.id_account, comments.id from accounts join comments on accounts.id=comments.id_account join threads on comments.id_thread=threads.id where threads.id=?";
+	$sqlquery = "SELECT accounts.username, comments.text, comments.timestamp, comments.id_account, comments.id FROM accounts JOIN comments ON accounts.id=comments.id_account JOIN threads ON comments.id_thread=threads.id WHERE threads.id=? ORDER BY comments.timestamp DESC";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("s", $thread_id);
 	$stmt->execute();
@@ -316,7 +316,7 @@ function isLikedThread($con, $id_thread, $id_user){
 function fetchThreadsSearchpage($con, $search)
 {
 	$search_phrase = "%$search%";
-	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id, threads.id_account FROM accounts JOIN threads ON accounts.id = threads.id_account where text like ? or title like ? order by timestamp DESC";
+	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id, threads.id_account FROM accounts JOIN threads ON accounts.id = threads.id_account WHERE text LIKE ? OR title LIKE ? ORDER BY timestamp DESC";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("ss", $search_phrase, $search_phrase);
 	$stmt->execute();
