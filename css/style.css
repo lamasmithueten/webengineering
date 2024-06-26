@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    font-size: 16px;
 }
 
 button,
@@ -42,7 +43,7 @@ body.dark {
     body.dark .admin-form button[type="submit"],
     body.dark .comment-form input[type="submit"],
     body.dark .search-button input[type="submit"],
-    body.dark .banner a {
+    body.dark .banner a{
         background-color: #ff8400;
     }
 
@@ -70,6 +71,14 @@ body.dark {
     body.dark tr:nth-of-type(even) {
         background-color: #424242;
     }
+
+    body.dark .title a {
+        color: #ff8400;
+    }
+
+        body.dark .title a:hover {
+            color: #b35900;
+        }
 
         
 
@@ -178,10 +187,6 @@ body {
     padding-top: 0;
 }
 
-.logout-button {
-    margin-right: -5px;
-}
-
     .delete-button button,
     .logout-button button,
     .admin-form button[type="submit"],
@@ -197,24 +202,33 @@ body {
 
 .logout-button {
     margin-top: -5px;
+    margin-right: -5px;
+}
+
+.logout-button button{
+    height:35px;
 }
 
 .banner {
-    margin: 10px 0 10px 10px;
+    margin: 10px 0 20px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .title {
-    font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
     .title a {
-        color: #0056b3;
+        font-size: 20px;
+        color: #007bff;
         text-decoration: none;
+    }
+
+    .title a:hover {
+        color: #0056b3;
     }
 
 .post {
@@ -306,6 +320,8 @@ body {
 }
 
 h1 {
+    font-size: 20px;
+    font-weight: bold;
     margin-top: 20px;
     text-align: center;
 }
@@ -423,7 +439,7 @@ input:checked + .slider {
 
 
 .theme-slider {
-    margin-right: 80px;
+    margin-right: 90px;
     margin-top: -10px;
 }
 
@@ -482,10 +498,14 @@ input:checked + .slider {
     height: 35px;
 }
 
+.clear-results{
+    margin-left: 45px;
+}
+
 /*Style für Adminlink*/
 .admin-link {
     position : absolute;
-    left: 205px;
+    left: 210px;
 }
 
 /* Admin-Seite Styles */

@@ -8,7 +8,7 @@ function drawThreadsMainpage()
 	$rows = fetchThreadsMainpage($con);
 	echo '<div class="banner">';
 	echo '<div class="submit-link">';
-	echo '	<a href="submit.html">submit a new thread</a>';
+	echo '	<a href="submit.html">Submit a new Thread</a>';
 	echo '</div>';
 	if ($_SESSION['id'] ==1){
 		echo '<div class="admin-link">';
@@ -109,8 +109,6 @@ function drawComments($rows, $thread_id, $con)
 	}
 	echo '</div>';
 }
-
-
 
 function drawLogoutButton(){
 	echo '<div class="logout-button">';
@@ -249,12 +247,16 @@ function drawThreadsSearchpage()
 	$rows = fetchThreadsSearchpage($con, $search);
 	echo '<div class="banner">';
 	echo '<div class="submit-link">';
-	echo '	<a href="submit.html">submit a new thread</a>';
+	echo '	<a href="submit.html">Submit a new Thread</a>';
 	echo '</div>';
 	drawSearch();
+	echo '<div class="clear-results">';
 	echo '<a href="mainpage.html">Clear results</a>';
+	echo '</div>';
 	if ($_SESSION['id'] ==1){
-		echo '<a href="admin">Admin</a>';
+		echo '<div class="admin-link">';
+		echo '<a href="admin.html">Admin</a>';
+		echo '</div>';
 	}
 	drawLogoutButton();
 	drawThemeSlider();
