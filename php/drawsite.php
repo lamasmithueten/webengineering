@@ -10,7 +10,7 @@ function drawThreadsMainpage()
 	echo '<div class="submit-link">';
 	echo '	<a href="submit.html">Submit a new Thread</a>';
 	echo '</div>';
-	if ($_SESSION['id'] ==1){
+	if ($_SESSION['id'] == 1){
 		echo '<div class="admin-link">';
 		echo '<a href="admin.html">Admin</a>';
 		echo '</div>';
@@ -55,11 +55,10 @@ function drawThread($rows, $thread_id, $con)
 		echo '<div class="text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
 		echo '</div>';
 		echo '<div class="user_info">';
-		echo '<div class="username-likes">'; // Neue div hinzufügen
+		echo '<div class="username-likes">';
 		drawLikesThread($con, $arrayEntry);
 		echo '<span class="thread-username">' . $arrayEntry['username'] . '</span>';
-		echo '</div>'; // Schließen Sie die neue div
-//		echo '<div class="username">' . $arrayEntry['username'] . '</div>';
+		echo '</div>';
 		echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
 		echo '</div>';
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] == 1 ) {
@@ -222,8 +221,7 @@ function drawThreads($rows, $con){
 			echo '<div class="username-likes">'; // Neue div hinzufügen
 			drawLikesThread($con, $arrayEntry);
 			echo '<span class="thread-username">' . $arrayEntry['username'] . '</span>';
-			echo '</div>'; // Schließen Sie die neue div
-//			echo '<div class="username">' . $arrayEntry["username"] . "</div>";
+			echo '</div>';
 			echo '<div class="timestamp">' .
 				$arrayEntry["timestamp"] .
 				"</div>";

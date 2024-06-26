@@ -216,9 +216,12 @@ body {
     align-items: center;
 }
 
+
+
 .title {
     font-weight: bold;
     margin-bottom: 10px;
+    font-size: 20px;
 }
 
     .title a {
@@ -247,8 +250,6 @@ body {
         width: 100%;
         height: auto;
     }
-
-
 
 .text,
 .comment-text {
@@ -280,13 +281,13 @@ body {
 
 .comment-form,
 .comments p {
-    margin: 20px 0;
+    margin: 20px 0 -10px;
     padding: 10px;
 }
 
     .comment-form p,
     .comments p {
-        font-size: 20px;
+        font-size: 24px;
         font-weight: bold;
         text-align: left;
     }
@@ -367,7 +368,6 @@ input[type="file"] {
     align-items: center;
     width: 90%;
     max-width: 500px;
-
 }
 
     .authenticationPopup .message {
