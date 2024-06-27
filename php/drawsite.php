@@ -65,7 +65,7 @@ function drawThread($rows, $thread_id, $con) //Baut einzelnen Thread auf Threadp
 		echo '</div>';
 		echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
 		echo '</div>';
-		//Löschknopf nur für Verfasser und Admin erstellen
+		//Lï¿½schknopf nur fï¿½r Verfasser und Admin erstellen
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] == 1 ) {
 		    echo '<form class="delete-button" action="../php/delete_thread.php" method="post">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
@@ -76,7 +76,7 @@ function drawThread($rows, $thread_id, $con) //Baut einzelnen Thread auf Threadp
 	}
 
 }
-function drawSubmitComments($thread_id)		//Erstellt das Inputfeld für neue Kommentare
+function drawSubmitComments($thread_id)		//Erstellt das Inputfeld fï¿½r neue Kommentare
 {
 	echo '<div class="comment-form">';
 	echo '<p>Submit a comment</p>';
@@ -96,12 +96,12 @@ function drawComments($rows, $thread_id, $con)		//Erstellt die Kommentare unter 
 		echo '<div class="comment" data-comment-id="' . $arrayEntry['id'] . '">';
 		echo '<div class="comment-text">' . str_replace(array('\r\n', '\n\r', '\n', '\r'), '<br>', $arrayEntry['text']) . '</div>';
 		echo '<div class="comment-info">';
-		echo '<div class="username-likes">'; // Neue div hinzufügen
+		echo '<div class="username-likes">'; // Neue div hinzufï¿½gen
 		drawLikes($con, $arrayEntry);
 		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
-		echo '</div>'; // Schließen Sie die neue div
+		echo '</div>'; // Schlieï¿½en Sie die neue div
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
-		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] == 1) {	//Ersteller des Kommentars und der Admin dürfen den Kommentar löschen
+		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] == 1) {	//Ersteller des Kommentars und der Admin dï¿½rfen den Kommentar lï¿½schen
 		    echo '<form class="delete-button" action="../php/delete_comment.php" method="post">';
 		    echo '<input type="hidden" name="comment_id" value="' . $arrayEntry['id'] . '">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
@@ -219,7 +219,7 @@ function drawThreads($rows, $con){		//Baut alle Threads auf der Mainpage und all
 			echo "</div>";
 
 			echo '<div class="user_info">';
-			echo '<div class="username-likes">'; // Neue div hinzufügen
+			echo '<div class="username-likes">'; // Neue div hinzufï¿½gen
 			drawLikesThread($con, $arrayEntry);
 			echo '<span class="thread-username">' . $arrayEntry['username'] . '</span>';
 			echo '</div>';
@@ -280,20 +280,20 @@ function drawAdminpage(){		//Baut die Adminpage
 	echo '<tr><th>Username</th><th>Current Emailaddresse</th><th>Update Email</th><th>Update Password</th><th>delete User</th></tr>';
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<tr><td>' . $arrayEntry['username'] . '</td><td>' . $arrayEntry['email'] . '</td>';
-		echo '<td><form class="admin-form update-button"action="php/update_email.php" method="post">';
-		echo '<input type="text" placeholder="email" name="email" maxlength="255" required>';
+		echo '<td><form class="admin-form update-button"action="" method="post" id="email' . $arrayEntry['id']. '">';
+		echo '<input type="email" placeholder="email" name="email" maxlength="255" required>';
 		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
-		echo '<button type="submit">Update</button>';
+		echo '<button type="button" onClick = confirmationPopUp(2,' . "\"email" . $arrayEntry['id'] . "\"" . ')>Update</button>';
 		echo '</form>';
-		echo '<td><form class="admin-form update-button"action="php/update_password.php" method="post">';
+		echo '<td><form class="admin-form update-button"action="php/update_password.php" method="post" id="password' . $arrayEntry['id']. '">';
 		echo '<input type="password" placeholder="password" name="password" maxlength="255" required>';
 		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
-		echo '<button type="submit">Update</button>';
+		echo '<button type="button" onClick = confirmationPopUp(3,' . "\"password" . $arrayEntry['id'] . "\"" . ')>Update</button>';
 		echo '</form>';
 		if ($arrayEntry['id'] != 1){
-			echo '<td><form class="admin-form delete-user-button"action="php/delete_user.php" method="post">';
+			echo '<td><form class="admin-form delete-user-button"action="php/delete_user.php" method="post" id="delete' . $arrayEntry['id']. '">';
 			echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
-			echo '<button type="submit">Delete User</button>';
+			echo '<button type="button" onClick = confirmationPopUp(1,' . "\"delete" . $arrayEntry['id'] . "\"" . ')>Delete User</button>';
 			echo '</form>';
 		}else{
 			echo '<td class="placeholder-delete"></td>';

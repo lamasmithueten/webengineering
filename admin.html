@@ -2,6 +2,7 @@
 <?php
 	include("php/redirect.php");
 	include("php/drawsite.php");
+	include("php/update_email.php");
 	if ($_SESSION['id'] != 1 ){
 		header("Location: index");
 	}
@@ -16,12 +17,33 @@
 	<title>Adminpage</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="icon" href="../icon/icon.png">
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="js/authenticationPopup.js"></script>
+	<script src="js/confirmationPopUp.js"></script>
 </head>
 
 <body>
 	<?php
+	$popUpStyle = "display: none;";
+	$message = NULL;
+	if (isset($_POST['email'])) {
+		$message = update_Email($_POST['email'], $_POST['user']);
+	}
+	
+	if(!is_null($message)) {
+		$popUpStyle = "display: flex;";
+	}
+
 	drawAdminpage();
 	?>
+
+	<div class="authenticationPopup" id="popup" style="<?php echo $popUpStyle; ?>">
+		<div class="message">
+			<?php echo $message; ?>
+		</div>
+		<button class="close-btn" onclick="closePopup()">×</button>
+	</div>
+
 	<script src="js/switchTheme.js"></script>
 </body>
 

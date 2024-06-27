@@ -1,14 +1,16 @@
 <?php
-include("redirect.php");
-include("sql.php");
+include_once("sql.php");
 
-$user = $_POST['user'];
-$con = openConnection();
-$email = mysqli_real_escape_string($con, $_POST['email']);
-updateEmail($con, $user, $email);
-closeConnection($con);
-header("Location: ../admin");
-exit();
+function update_Email($email, $user) {
+    $con = openConnection();
+    $email = mysqli_real_escape_string($con, $email);
+    if(checkEmailTaken($con, $email)){
+        return "E-Mail is already taken";
+    }
+    updateEmail($con, $user, $email);
+    closeConnection($con);
+    return "E-Mail was updated";
+}
 
 
 ?>
