@@ -2,10 +2,11 @@
 
 include ("sql.php");
 
-function drawThreadsMainpage()
+function drawThreadsMainpage()	//Startseite
 {
 	$con = openConnection();
-	$rows = fetchThreadsMainpage($con);
+	$rows = fetchThreadsMainpage($con);				//Alle notwendigen Infos der Threads in Array abspeichern
+	//Banner 
 	echo '<div class="banner">';
 	echo '<div class="submit-link">';
 	echo '	<a href="submit.html">Submit a new Thread</a>';
@@ -19,30 +20,33 @@ function drawThreadsMainpage()
 	drawLogoutButton();
 	drawThemeSlider();
 	echo '</div>';
+	//Banner Ende, Anzeigen der Threads
 	drawThreads($rows, $con);
 	closeConnection($con);
 }
 
-function drawThreadsPage($thread_id)
+function drawThreadsPage($thread_id)	//Ganze Threadseite bauen
 {
 	$con = openConnection();
 	$rows = fetchThread($con, $thread_id);
 	$threadTitle = isset($rows[0]['title']) ? $rows[0]['title'] : 'Default Title';
 
+	//Banner
 	echo '<div class="banner">';
 	echo '<a href="index.html" class="index-link">Threads</a>';
 	drawLogoutButton();
 	drawThemeSlider();
 	echo '</div>';
-	
+	//Thread
 	drawThread($rows, $thread_id, $con);
 	drawSubmitComments($thread_id);
+	//Kommentare
 	$rows = fetchAllComments($con, $thread_id);
 	drawComments($rows, $thread_id, $con);
 	closeConnection($con);
 }
 
-function drawThread($rows, $thread_id, $con)
+function drawThread($rows, $thread_id, $con) //Baut einzelnen Thread auf Threadpage
 {
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<div class="thread" data-thread-id="' . $arrayEntry['id'] . '">';
@@ -61,6 +65,7 @@ function drawThread($rows, $thread_id, $con)
 		echo '</div>';
 		echo '<div class="timestamp">' . $arrayEntry['timestamp'] . '</div>';
 		echo '</div>';
+		//Löschknopf nur für Verfasser und Admin erstellen
 		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] == 1 ) {
 		    echo '<form class="delete-button" action="../php/delete_thread.php" method="post">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
@@ -71,7 +76,7 @@ function drawThread($rows, $thread_id, $con)
 	}
 
 }
-function drawSubmitComments($thread_id)
+function drawSubmitComments($thread_id)		//Erstellt das Inputfeld für neue Kommentare
 {
 	echo '<div class="comment-form">';
 	echo '<p>Submit a comment</p>';
@@ -83,7 +88,7 @@ function drawSubmitComments($thread_id)
 	echo '</div>';
 }
 
-function drawComments($rows, $thread_id, $con)
+function drawComments($rows, $thread_id, $con)		//Erstellt die Kommentare unter einem Thread
 {
 	echo '<div class="comments" data-user-id="' . $_SESSION['id'] . '">';
 	echo '<p>Comments</p>';
@@ -96,7 +101,7 @@ function drawComments($rows, $thread_id, $con)
 		echo '<span class="comment-username">' . $arrayEntry['username'] . '</span>';
 		echo '</div>'; // Schließen Sie die neue div
 		echo '<span class="comment-timestamp">' . $arrayEntry['timestamp'] . '</span>';
-		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] == 1) {
+		if(isset($_SESSION['id']) && $_SESSION['id'] == $arrayEntry['id_account'] || $_SESSION['id'] == 1) {	//Ersteller des Kommentars und der Admin dürfen den Kommentar löschen
 		    echo '<form class="delete-button" action="../php/delete_comment.php" method="post">';
 		    echo '<input type="hidden" name="comment_id" value="' . $arrayEntry['id'] . '">';
 		    echo '<input type="hidden" name="thread_id" value="' . $thread_id . '">';
@@ -122,7 +127,7 @@ function drawLogoutButton(){
 	echo '</div>';
 }
 
-function drawThemeSlider(){
+function drawThemeSlider(){			//Knopf zum Umschalten zwischen Dark und Lightmode
 	echo '<div class="theme-slider">';
 	echo '<label class="switch">';
 	echo '<input type="checkbox" id="themeSwitch">';
@@ -131,7 +136,7 @@ function drawThemeSlider(){
 	echo '</div>';
 }
 
-function drawLikes($con, $arrayEntry) {
+function drawLikes($con, $arrayEntry) {			//Baut Likes unter Kommentaren
     echo '<div class="like-container">';
     echo '<input type="checkbox" id="like-checkbox-' . $arrayEntry['id'] . '" class="like-checkbox"';
     if (isLiked($con, $arrayEntry['id'], $_SESSION['id']) == true) {
@@ -151,9 +156,7 @@ function drawLikes($con, $arrayEntry) {
 }
 
 
-//-----------------------------------WIP
-
-function drawLikesThread($con, $arrayEntry) {
+function drawLikesThread($con, $arrayEntry) {		//Baut Likes von Threads
     echo '<div class="like-container">';
     echo '<input type="checkbox" id="like-checkbox-' . $arrayEntry['id'] . '" class="like-checkbox"';
     if (isLikedThread($con, $arrayEntry['id'], $_SESSION['id']) == true) {
@@ -172,10 +175,8 @@ function drawLikesThread($con, $arrayEntry) {
     echo '</div>';
 }
 
-//--------------------------------WIP
 
-
-function drawSearch(){
+function drawSearch(){			//Suchleiste
     echo '<form action="search" method="post">';
     echo '<div class="search-container">';
     echo '<div class="search-bar">';
@@ -188,7 +189,7 @@ function drawSearch(){
     echo '</form>';
 }
 
-function drawThreads($rows, $con){
+function drawThreads($rows, $con){		//Baut alle Threads auf der Mainpage und alle relevanten Threads auf der Searchpage
 		foreach ($rows as $fieldname => $arrayEntry) {
 			echo '<div class="thread" data-thread-id="' . $arrayEntry['id'] . '">';
 			echo '<div class="title"><a href="thread/' .
@@ -238,7 +239,7 @@ function drawThreads($rows, $con){
 		}
 }
 
-function drawThreadsSearchpage()
+function drawThreadsSearchpage()	//Baut die Searchpage 
 {
 	$con = openConnection();
 	$search = mysqli_real_escape_string($con, $_POST['search']);
@@ -263,7 +264,7 @@ function drawThreadsSearchpage()
 	closeConnection($con);
 }
 
-function drawAdminpage(){
+function drawAdminpage(){		//Baut die Adminpage
 	$con = openConnection();
 	$rows = fetchAccountsInfo($con);
 	closeConnection($con);
