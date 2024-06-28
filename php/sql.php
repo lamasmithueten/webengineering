@@ -12,7 +12,7 @@ function openConnection()
 }
 
 
-function fetchThreadsMainpage($con)
+function fetchThreadsMainpage($con) //Keine Filterung notwendig auf Mainpage. Bei der Searchpage wird noch ein WHERE am Ende ergänzt
 {
 	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id, threads.id_account FROM accounts JOIN threads ON accounts.id = threads.id_account order by timestamp DESC";
 	$stmt = $con->prepare($sqlquery);
@@ -27,7 +27,7 @@ function closeConnection($con)
 	mysqli_close($con);
 }
 
-function fetchThread($con, $thread_id)
+function fetchThread($con, $thread_id)  //Informationen eines einzelnen Threads für die indivdiduelle Threadseite (/thread/$THREADNUMMER)
 {
 	$sqlquery = "SELECT username, text, timestamp, picture_path, title, threads.id, threads.id_account FROM accounts JOIN threads ON accounts.id = threads.id_account WHERE threads.id = ?";
 	$stmt = $con->prepare($sqlquery);
@@ -42,7 +42,7 @@ function fetchThread($con, $thread_id)
 	return $rows;
 }
 
-function fetchAllComments($con, $thread_id)
+function fetchAllComments($con, $thread_id) //Kommentare unterhalb der Threads
 {
 	$sqlquery = "SELECT accounts.username, comments.text, comments.timestamp, comments.id_account, comments.id FROM accounts JOIN comments ON accounts.id=comments.id_account JOIN threads ON comments.id_thread=threads.id WHERE threads.id=? ORDER BY comments.timestamp DESC";
 	$stmt = $con->prepare($sqlquery);
@@ -52,6 +52,8 @@ function fetchAllComments($con, $thread_id)
 	$rows = $result->fetch_all(MYSQLI_ASSOC);
 	return $rows;
 }
+
+//Relevant für Validierung bei Accountregistrierung
 
 function checkUsernameTaken($con, $username)
 {
@@ -116,6 +118,8 @@ function createComment($con, $thread_id, $comment, $account_id)
 	$stmt->close();
 }
 
+//Je nachdem, ob der Thread ein Bild hat oder nicht, muss eine unterschiedliche SQL-Abfrage passieren
+
 function submitThreadWithPicture($con, $text, $id, $filename, $title, $temp_file, $fullpath)
 {
 	$sqlquery = "INSERT INTO threads (id, text, id_account, timestamp, picture_path, title) VALUES (NULL, ?, ?, now(), ?, ?)";
@@ -150,8 +154,10 @@ function submitThreadWithoutPicture($con, $text, $id, $title)
 	}
 }
 
+//Die Datenbank ist sehr hierarchisch mit ihren Integrity Constraints: account -> thread -> kommentar -> Likes
+
 function deleteComment($con, $comment_to_delete){
-	deleteAllLikesComment($con, $comment_to_delete);
+	deleteAllLikesComment($con, $comment_to_delete);		//Integrity Constraint in Tabelle verlangt löschen aller Likes vorher. Gleiche Prinzip bei den anderen Löschfunktionen
 	$sqlquery = "DELETE FROM comments WHERE id=?";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("i", $comment_to_delete);
@@ -261,8 +267,6 @@ function isLiked($con, $id_comment, $id_user){
 
 }
 
-//-------------------------------------WIPanfang
-
 function createLikeThread($con, $id_user, $id_thread){
         $sqlquery = "INSERT INTO thread_likes (id_user, id_thread) VALUES (?, ?)";
         $stmt = $con->prepare($sqlquery);
@@ -291,7 +295,7 @@ function getLikeCountThread($con, $id_thread){
 	return $like_count;
 }
 
-function isLikedThread($con, $id_thread, $id_user){
+function isLikedThread($con, $id_thread, $id_user){			//Zum Setzen der Checkbox, ob schon geliked wurde von Person oder nicht
 	$sqlquery = "SELECT COUNT(*) AS like_count FROM thread_likes WHERE id_thread = ? AND id_user = ? ";
 	$stmt = $con->prepare($sqlquery);
 	$stmt->bind_param("ii", $id_thread, $id_user);
@@ -311,7 +315,6 @@ function isLikedThread($con, $id_thread, $id_user){
 
 }
 
-//---------------------------------------WIPende
 
 function fetchThreadsSearchpage($con, $search)
 {
@@ -335,7 +338,9 @@ function fetchAccountsInfo($con)
 	return $rows;
 }
 
-function deleteAccount($con, $id){
+//Beim Löschen von Accounts müssen auch die entsprechenden Likes und Beiträge gelöscht werden, damit die Integrity Constraints nicht verletzt werden
+
+function deleteAccount($con, $id){	
 	deleteAllLikesUser($con, $id);
 	deleteAllCommentsUser($con, $id);
 	$sqlquery = "SELECT id FROM threads WHERE id_account=?";
