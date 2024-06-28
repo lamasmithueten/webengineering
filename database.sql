@@ -38,6 +38,9 @@ CREATE TABLE `accounts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `accounts` VALUES
+(1,'admin','$2y$10$78SuO9ppgbKpX6LIHu29UeOaU.zK/7pobG7u8w/Pvt8q9KvNjWcpC','test@test.de'),
+(2,'user','$2y$10$leK19gwLnB3eZ/EfMsgfSOMrAGgvI2s0P03mXDaLf9LqFOyO2Rzhy','test@test.de');
 
 --
 -- Table structure for table `comment_likes`
@@ -139,4 +142,4 @@ CREATE TABLE `threads` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-26 11:34:23
+-- Dump completed on 2024-06-28 17:54:39
