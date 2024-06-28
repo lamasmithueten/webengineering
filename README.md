@@ -34,9 +34,10 @@ Weiterhin kann der Admin alle Beiträge löschen (Threads und Kommentare)
 - Apache als Webserver (wichtig für die .htaccess-Datei)
 - Mariadb als Datenbank
 
-Optional:
-- ...
-- ...
+## Demoseite
+
+Unsere Testseite kann auch zu Demozwecken verwendet werden. Nur der Adminzugang ist nicht öffentlich, da die Anmeldeinformationen für diesen Account vertraulich sind.
+https://webeng.mwerr.de/
 
 ## Contributors
 | Name | Matrikel number | Github account |
