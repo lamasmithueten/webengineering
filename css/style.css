@@ -41,6 +41,7 @@ body.dark {
     body.dark .delete-button button,
     body.dark .logout-button button,
     body.dark .admin-form button[type="submit"],
+    body.dark .admin-form button[type="button"],
     body.dark .comment-form input[type="submit"],
     body.dark .search-button input[type="submit"],
     body.dark .banner a{
@@ -110,6 +111,7 @@ body {
     .container input[type="text"],
     .search-bar input[type="text"],
     .admin-form input[type="text"],
+    .admin-form input[type="email"],
     .admin-form input[type="password"],
     textarea {
         width: 100%;
@@ -190,6 +192,7 @@ body {
     .delete-button button,
     .logout-button button,
     .admin-form button[type="submit"],
+    .admin-form button[type="button"],
     .search-button input[type="submit"] {
         padding: 4px 8px;
         background-color: #007bff;
