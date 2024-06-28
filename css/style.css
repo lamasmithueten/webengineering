@@ -40,7 +40,6 @@ body.dark {
     body.dark .input[type="submit"],
     body.dark .delete-button button,
     body.dark .logout-button button,
-    body.dark .admin-form button[type="submit"],
     body.dark .admin-form button[type="button"],
     body.dark .comment-form input[type="submit"],
     body.dark .search-button input[type="submit"],
@@ -531,11 +530,11 @@ table {
     gap: 10px;
 }
 
-    .admin-form button[type="submit"]{
-        height: 35px;
+    .admin-form button[type="button"]{
+        height: 40px;
     }
 
-    .admin-form input[type="text"],
+    .admin-form input[type="email"],
     .admin-form input[type="password"]{
         margin-top: 10px;
     }

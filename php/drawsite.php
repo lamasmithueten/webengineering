@@ -281,12 +281,12 @@ function drawAdminpage(){		//Baut die Adminpage
 	foreach ($rows as $fieldname => $arrayEntry) {
 		echo '<tr><td>' . $arrayEntry['username'] . '</td><td>' . $arrayEntry['email'] . '</td>';
 		echo '<td><form class="admin-form update-button"action="" method="post" id="email' . $arrayEntry['id']. '">';
-		echo '<input type="email" placeholder="email" name="email" maxlength="255" required>';
+		echo '<input type="email" placeholder="E-Mail" name="email" maxlength="255" required>';
 		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
 		echo '<button type="button" onClick = confirmationPopUp(2,' . "\"email" . $arrayEntry['id'] . "\"" . ')>Update</button>';
 		echo '</form>';
 		echo '<td><form class="admin-form update-button"action="php/update_password.php" method="post" id="password' . $arrayEntry['id']. '">';
-		echo '<input type="password" placeholder="password" name="password" maxlength="255" required>';
+		echo '<input type="password" placeholder="Password" name="password" maxlength="255" required>';
 		echo '<input type="hidden" name="user" value="' . $arrayEntry["id"] . '" >';
 		echo '<button type="button" onClick = confirmationPopUp(3,' . "\"password" . $arrayEntry['id'] . "\"" . ')>Update</button>';
 		echo '</form>';
