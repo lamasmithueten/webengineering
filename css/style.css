@@ -12,11 +12,17 @@ input[type="submit"] {
     font-family: Arial, sans-serif;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
 :root {
     --color-bg: #ffffff;
     --color-text: #000000;
 }
-
+/*Style für den Dark-Theme*/
 body.dark {
     background-color: #1A1A1A;
     color: #F5F5F5;
@@ -79,14 +85,6 @@ body.dark {
         body.dark .title a:hover {
             color: #b35900;
         }
-
-        
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-}
 
 /* Styles für Login, Registrierung und Passwortrücksetzung */
 .authenticate {
@@ -167,7 +165,7 @@ body {
         color: #0056b3; 
     }
 
-/* Styles für die Hauptseite und die Threads*/
+/* Styles für die Hauptseite, die Threads und die Kommentare*/
 .thread,
 .comment {
     position: relative;
@@ -217,8 +215,6 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
-
 
 .title {
     font-weight: bold;
@@ -389,7 +385,7 @@ input[type="file"] {
             color: #ff0000;
         }
 
-/* Styles für das Theme-Icon */
+/* Styles für den Theme-Slider */
 .switch {
     position: relative;
     display: inline-block;
