@@ -12,7 +12,7 @@ Ein Forum, in welchem Nutzer Nachrichten, Bilder & Memes miteinander teilen kön
 ## Datenbank
 
 Der Zugriff auf die Datenbank wird über eine Datei php/access_database.php ermöglicht. Dort müssen die eigenen Login Credentials eingetragen werden.
-Einen SQL-Dump für die Datenbankstruktur finden sie unter database.sql
+Einen SQL-Dump für die Datenbankstruktur finden Sie unter database.sql
 
 ## Userverwaltung
 
