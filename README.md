@@ -16,7 +16,7 @@ Einen SQL-Dump für die Datenbankstruktur finden Sie unter database.sql
 
 ## Userverwaltung
 
-Der erste Nutzer, der erstellt wird (Also mit der ID 1 in der Tabelle Accounts in der Datenbank) ist das Administratorkonto.
+Der erste Nutzer, der erstellt wird (Also mit der ID 1 in der Tabelle Accounts in der Datenbank) ist das Administratorkonto. (In diesem Fall gibt es schon zwei Accounts, admin und user, mit dem gewünschten Passwort)
 Er hat ein Adminpanel, wo alle User und ihre Emailadressen aufgelistet sind. Dort kann er manuell neue Passwörter vergeben, die Emailadresse abändern oder sogar Accounts löschen.
 Weiterhin können Nutzer selbstständig ihr Passwort zurücksetzen, falls sie es vergessen haben. Emailversand via sendmail muss dafür eingerichtet sein.
 
